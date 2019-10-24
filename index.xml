@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>post on My New Hugo Site</title>
-    <link>http://clouda3.github.io/test/</link>
+    <link>http://clouda3.github.io/</link>
     <description>Recent content in post on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 16 Oct 2019 15:16:09 +0800</lastBuildDate>
     
-	<atom:link href="http://clouda3.github.io/test/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://clouda3.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First</title>
-      <link>http://clouda3.github.io/test/posts/first/</link>
+      <link>http://clouda3.github.io/posts/first/</link>
       <pubDate>Tue, 15 Oct 2019 11:21:53 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/test/posts/first/</guid>
+      <guid>http://clouda3.github.io/posts/first/</guid>
       <description></description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://clouda3.github.io/test/about/</link>
+      <link>http://clouda3.github.io/about/</link>
       <pubDate>Mon, 14 Oct 2019 18:03:46 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/test/about/</guid>
+      <guid>http://clouda3.github.io/about/</guid>
       <description> test abc  </description>
     </item>
     
     <item>
       <title>Third</title>
-      <link>http://clouda3.github.io/test/posts/third/</link>
+      <link>http://clouda3.github.io/posts/third/</link>
       <pubDate>Mon, 14 Oct 2019 15:51:34 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/test/posts/third/</guid>
+      <guid>http://clouda3.github.io/posts/third/</guid>
       <description> abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222  </description>
     </item>
     
