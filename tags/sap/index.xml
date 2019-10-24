@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sap on My New Hugo Site</title>
-    <link>http://www.gohugo.me/tags/sap/</link>
+    <link>http://clouda3.github.io/tags/sap/</link>
     <description>Recent content in sap on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 14 Oct 2019 15:51:34 +0800</lastBuildDate>
     
-	<atom:link href="http://www.gohugo.me/tags/sap/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://clouda3.github.io/tags/sap/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Third</title>
-      <link>http://www.gohugo.me/posts/third/</link>
+      <link>http://clouda3.github.io/posts/third/</link>
       <pubDate>Mon, 14 Oct 2019 15:51:34 +0800</pubDate>
       
-      <guid>http://www.gohugo.me/posts/third/</guid>
+      <guid>http://clouda3.github.io/posts/third/</guid>
       <description> abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222  </description>
     </item>
     
