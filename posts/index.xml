@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>my post list123 on My New Hugo Site</title>
+    <title>my post on Clouda3</title>
     <link>http://clouda3.github.io/posts/</link>
-    <description>Recent content in my post list123 on My New Hugo Site</description>
+    <description>Recent content in my post on Clouda3</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 14 Oct 2019 15:38:20 +0800</lastBuildDate>
@@ -12,21 +12,22 @@
     
     
     <item>
+      <title>Third</title>
+      <link>http://clouda3.github.io/posts/third/</link>
+      <pubDate>Wed, 16 Oct 2019 15:51:34 +0800</pubDate>
+      
+      <guid>http://clouda3.github.io/posts/third/</guid>
+      <description>abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222 test  0{{ define &amp;#34;main&amp;#34; -}} 1&amp;lt;div class=&amp;#34;post&amp;#34;&amp;gt; 2 &amp;lt;h1&amp;gt;{{ .Title }}&amp;lt;/h1&amp;gt; 3 &amp;lt;time datetime={{ .Date.Format &amp;#34;2006-01-02T15:04:05Z0700&amp;#34; }} class=&amp;#34;post-date&amp;#34;&amp;gt;{{ .Date.Format &amp;#34;Mon, Jan 2, 2006&amp;#34; }}&amp;lt;/time&amp;gt; 4 {{ .Content }} 5&amp;lt;/div&amp;gt; 6 7{{ if .Site.DisqusShortname -}} 8&amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt; 9{{ template &amp;#34;_internal/disqus.html&amp;#34; . }} 10{{- end }} 11 12{{ partial &amp;#34;related.html&amp;#34; . }} 13{{- end }} bbbbbbbbbbbbbbbbbbbbbbbbbbbbb  111111111111 22222222222 test
+efg 111111111111</description>
+    </item>
+    
+    <item>
       <title>First</title>
       <link>http://clouda3.github.io/posts/first/</link>
       <pubDate>Tue, 15 Oct 2019 11:21:53 +0800</pubDate>
       
       <guid>http://clouda3.github.io/posts/first/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Third</title>
-      <link>http://clouda3.github.io/posts/third/</link>
-      <pubDate>Mon, 14 Oct 2019 15:51:34 +0800</pubDate>
-      
-      <guid>http://clouda3.github.io/posts/third/</guid>
-      <description> abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222  </description>
+      <description> test00 test01 test02  </description>
     </item>
     
   </channel>

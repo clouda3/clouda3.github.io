@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>My New Hugo Site</title>
+  <title>Clouda3</title>
   <meta name="description" content="" />
 
   
@@ -24,34 +24,40 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="http://clouda3.github.io/index.xml" rel="alternate" type="application/rss+xml" title="My New Hugo Site" />
+  <link href="http://clouda3.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Clouda3" />
   
+   <form class="uk-search" action="http://clouda3.github.io/search/">
+    <input class="uk-search-field" id="q" name="q" type="search" placeholder="search in blog" />
+</form>aaaa
 </head>
 
   <body class=" ">
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="http://clouda3.github.io/"><h1>My New Hugo Site</h1></a>
+      <a href="http://clouda3.github.io/"><h1>Clouda3</h1></a>
       <p class="lead">
-      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      
       </p>
     </div>
 
     <nav>
+	
       <ul class="sidebar-nav">
 	   
            <li>   <a class="sidebar-nav-item active" href="/" title="">home</a>
-</li><li>   <a class="sidebar-nav-item" href="/posts/" title="">Blog</a>
+</li><li>   <a class="sidebar-nav-item" href="/posts/" title="my blog">Blog</a>
 </li><li>   <a class="sidebar-nav-item" href="/tags/" title="">Tags</a>
 </li><li>   <a class="sidebar-nav-item" href="/about" title="">About</a>
 </li><li>   <a class="sidebar-nav-item" href="/index.xml" title="">RSS</a>
+</li><li>   <a class="sidebar-nav-item" href="/tests/" title="">Tests</a>
 </li>
 		
       </ul>
+	  <ul class="sidebar-nav"><br/><br/><br/><br/><br/><br/><br/></ul>
     </nav>
 
-    <p>&copy; 2019. All rights reserved. </p>
+    <p>&copy;  xxx 公司 2019.  All rights reserved.  </p>
   </div>
 </aside>
 
@@ -59,10 +65,29 @@
     <div class="posts">
 <article class="post">
   <h1 class="post-title">
+    <a href="http://clouda3.github.io/tests/myfirst/">Myfirst</a>
+  </h1>
+  <time datetime="2019-10-30T16:13:07&#43;0800" class="post-date">Wed, Oct 30, 2019</time>
+  
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="http://clouda3.github.io/posts/third/">Third</a>
+  </h1>
+  <time datetime="2019-10-16T15:51:34&#43;0800" class="post-date">Wed, Oct 16, 2019</time>
+  abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222 test  0{{ define &#34;main&#34; -}} 1&lt;div class=&#34;post&#34;&gt; 2 &lt;h1&gt;{{ .Title }}&lt;/h1&gt; 3 &lt;time datetime={{ .Date.Format &#34;2006-01-02T15:04:05Z0700&#34; }} class=&#34;post-date&#34;&gt;{{ .Date.Format &#34;Mon, Jan 2, 2006&#34; }}&lt;/time&gt; 4 {{ .Content }} 5&lt;/div&gt; 6 7{{ if .Site.DisqusShortname -}} 8&lt;h2&gt;Comments&lt;/h2&gt; 9{{ template &#34;_internal/disqus.html&#34; . }} 10{{- end }} 11 12{{ partial &#34;related.html&#34; . }} 13{{- end }} bbbbbbbbbbbbbbbbbbbbbbbbbbbbb  111111111111 22222222222 test
+efg 111111111111
+  
+  <div class="read-more-link">
+    <a href="/posts/third/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="http://clouda3.github.io/posts/first/">First</a>
   </h1>
   <time datetime="2019-10-15T11:21:53&#43;0800" class="post-date">Tue, Oct 15, 2019</time>
-  
+   test00 test01 test02  
   
 </article><article class="post">
   <h1 class="post-title">
@@ -73,10 +98,10 @@
   
 </article><article class="post">
   <h1 class="post-title">
-    <a href="http://clouda3.github.io/posts/third/">Third</a>
+    <a href="http://clouda3.github.io/search/">Search Results</a>
   </h1>
-  <time datetime="2019-10-14T15:51:34&#43;0800" class="post-date">Mon, Oct 14, 2019</time>
-   abc  aaaaaaaa bbbbbbbb  efg  111111111111 22222222222  
+  <time datetime="0001-01-01T00:00:00Z" class="post-date">Mon, Jan 1, 0001</time>
+  (function() {var cx = '009059558632698478175:komsd19zxh0';var gcse = document.createElement('script');gcse.type = 'text/javascript';gcse.async = true;gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse, s);})(); 
   
 </article>
 </div>
