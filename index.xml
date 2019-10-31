@@ -48,14 +48,5 @@ efg 111111111111</description>
       <description> test abc  </description>
     </item>
     
-    <item>
-      <title>Search Results</title>
-      <link>http://clouda3.github.io/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://clouda3.github.io/search/</guid>
-      <description>(function() {var cx = &#39;003329286589048556679:otrxh1qv16g&#39;;var gcse = document.createElement(&#39;script&#39;);gcse.type = &#39;text/javascript&#39;;gcse.async = true;gcse.src = &#39;https://cse.google.com/cse.js?cx=&#39; + cx;var s = document.getElementsByTagName(&#39;script&#39;)[0];s.parentNode.insertBefore(gcse, s);})(); </description>
-    </item>
-    
   </channel>
 </rss>
