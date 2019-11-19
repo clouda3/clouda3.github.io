@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>一个ec2 instance上配置多个eni | My New Hugo Site</title>
+    <meta property="og:title" content="一个ec2 instance上配置多个eni - My New Hugo Site">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-09-02T08:40:37&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-09-02T08:40:37&#43;08:00">
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="multi eni on ec2">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://clouda3.github.io/">
+                        My New Hugo Site
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://clouda3.github.io/">首页</a>
+                    
+                    <a  href="http://clouda3.github.io/posts/" title="Blog">Blog</a>
+                    
+                    <a  href="http://clouda3.github.io/tags/" title="Tags">Tags</a>
+                    
+                    <a  href="http://clouda3.github.io/about" title="About">About</a>
+                    
+                    <a  href="http://clouda3.github.io/index.xml" title="RSS">RSS</a>
+                    
+                    <a  href="http://clouda3.github.io/posts/aws-x-ray/" title="aws x-ray">aws x-ray</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        <div id="virtual_toc_list" style="display: none">
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#一个ec2-instance-配置多网卡">一个ec2 instance 配置多网卡</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        <div id="float_toc_div" style="margin: 10px;border: 1px solid gray;z-index:99999;display: none;">
+            <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                <strong id="toc_btn_open" style="color: black;font-size: large;">目录</strong>
+                <strong id="toc_btn_close" style="color: black;font-size: large;float: right">╳</strong>
+            </header>
+            <div id="toc_list" style="background-color: #f3f3f3;color: black;padding: 10px;">
+        
+            </div>
+        </div>
+        <style type="text/css">
+            #float_toc_div {
+                position: fixed;
+                display: none;
+                 
+                height: auto;
+                font-size: 13px;
+            }
+        
+            #toc_list a:hover,
+            #toc_list a:active {
+                color: #ba3925;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                let tocNavElem = document.getElementById("TableOfContents");
+                let floatTocDivElem = document.getElementById("float_toc_div");
+                let tocListElem = floatTocDivElem.getElementsByTagName('div')[0];
+                let colGroupElem = document.getElementById("body").getElementsByClassName("col-group")[0]
+                let floatTocWidth = (document.body.clientWidth - colGroupElem.offsetWidth) / 2 - 16;
+                var useFloatToc = false;
+
+                if (floatTocWidth >= 100) {
+                    useFloatToc = true;
+                    document.getElementById("toc_list").appendChild(tocNavElem);
+                    floatTocDivElem.style.display = 'block';
+                    floatTocDivElem.style.width = floatTocWidth + 'px';
+                    top();
+                    floatTocDivElem.style.left = '0px';
+
+                    function top() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.top = window.innerHeight / 9 + 'px';
+                        }
+                    }
+
+                    function ishide() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.display = 'block';
+                        }
+                    }
+
+                    window.onscroll = function () {
+                        ishide();
+                        if ((document.documentElement.scrollTop != 0) && (floatTocDivElem.style.display == 'block')) {
+                            top();
+                        }
+                    };
+
+                    window.onresize = function () {
+                        ishide();
+                    }
+
+                    document.getElementById("toc_btn_open").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "none":
+                                document.getElementById("toc_btn_close").style.display = "";
+                                tocListElem.style.display = "";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "1px solid gray";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+
+                    document.getElementById("toc_btn_close").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "":
+                                document.getElementById("toc_btn_close").style.display = "none";
+                                tocListElem.style.display = "none";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+                } else {
+                    let fixedTocElem = document.getElementsByClassName("toc-article")[0];
+                    fixedTocElem.appendChild(tocNavElem);
+                    fixedTocElem.parentElement.style.display = "";
+                }
+                document.getElementById("virtual_toc_list").remove();
+            };   
+        </script>
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">一个ec2 instance上配置多个eni</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年9月2日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="clear" style="display: none">
+                            <div class="toc-article">
+                                <div class="toc-title">文章目录</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="一个ec2-instance-配置多网卡">一个ec2 instance 配置多网卡</h3>
+
+<ul>
+<li>首先要确定你需要几个公网IP，以2个为例</li>
+<li>首先要确定你需要几个网卡，以2个为例</li>
+<li>申请两个 elastic ip：IP1 ip2</li>
+<li>申请两个eni(network interface)：eni1，eni2</li>
+<li>创建一个ec2</li>
+<li>把ip1 绑定到eni1,elastic ip-&gt;选中IP-&gt;associate-&gt;resource type:network interface -&gt; private ip 自动选择</li>
+<li>把ip2 绑定到eni2,此处省略步骤</li>
+<li>把eni1绑定到ec2，network interface 页面-&gt;选择eni1-&gt;attach-&gt; 选择 ec2 instance id</li>
+<li>把eni2绑定到ec2,此处省略步骤</li>
+<li>在ec2 instance 页面,看到iP里面公网IP只有一个，private ip 有2个</li>
+
+<li><p>为什么少了一个?用putty connnect 这个两个ip，都是没有问题，ec2 的console不显示而已</p>
+
+<pre><code>[ec2-user@ip-172-31-1-176 ~]$ ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 9001
+    inet 172.31.1.176  netmask 255.255.255.0  broadcast 172.31.1.255
+    inet6 fe80::8a:93ff:fefd:ef5c  prefixlen 64  scopeid 0x20&lt;link&gt;
+    ether 02:8a:93:fd:ef:5c  txqueuelen 1000  (Ethernet)
+    RX packets 4115218  bytes 1170825027 (1.0 GiB)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 3592874  bytes 8202330562 (7.6 GiB)
+    TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 9001
+    inet 172.31.1.87  netmask 255.255.255.0  broadcast 172.31.1.255
+    inet6 fe80::f1:16ff:fefa:1bba  prefixlen 64  scopeid 0x20&lt;link&gt;
+    ether 02:f1:16:fa:1b:ba  txqueuelen 1000  (Ethernet)
+    RX packets 333  bytes 26643 (26.0 KiB)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 286  bytes 33695 (32.9 KiB)
+    TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+    inet 127.0.0.1  netmask 255.0.0.0
+    inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+    loop  txqueuelen 1000  (Local Loopback)
+    RX packets 10549  bytes 8263339 (7.8 MiB)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 10549  bytes 8263339 (7.8 MiB)
+    TX errors 0  dropped 0 overruns 0  carrier 0 collisions 0
+
+
+</code></pre></li>
+</ul>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/aws-service-catalog/">service catalog 简介</a></li>
+        
+        <li><a href="/posts/aws-infrastructure-as-code/">aws infrastructure as code</a></li>
+        
+        <li><a href="/posts/aws-sap-sts-service/">使用Aws sts创建临时credential</a></li>
+        
+        <li><a href="/posts/aws-sap-system-manager/"> 使用Aws System Manager 统一管理 aws resource </a></li>
+        
+        <li><a href="/posts/aws-nat-instance-setup/">NAT instance setup 简介</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://clouda3.github.io/tags/aws">aws</a></li>
+                                
+                                <li><a href="http://clouda3.github.io/tags/sap">sap</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://clouda3.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-saa-pass/" title="SAA-CO1考试之路">SAA-CO1考试之路</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-sap-passed/" title="aws sap passed">aws sap passed</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-x-ray/" title="aws x-ray">aws x-ray</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-migration/" title="accelerating aws migration">accelerating aws migration</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-glue-athena-quicksight/" title="aws online analytical processing (or OLAP)">aws online analytical processing (or OLAP)</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/" title="Difference between user pool and identity pool(Federated Identities)">Difference between user pool and identity pool(Federated Identities)</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-cognito-sample/" title="Aws cognito sample">Aws cognito sample</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/" title="Aws cloudformation deploy lambda and apigateway">Aws cloudformation deploy lambda and apigateway</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-ecs-tutorial/" title="Aws ecs tutorial">Aws ecs tutorial</a>
+    </li>
+    
+    <li>
+        <a href="http://clouda3.github.io/posts/aws-sct-dms-tutorial/" title="aws数据库迁移工具简介">aws数据库迁移工具简介</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="http://clouda3.github.io/categories/aws/">aws (1)</a></li>
+    
+    <li><a href="http://clouda3.github.io/categories/saa/">saa (1)</a></li>
+    
+    <li><a href="http://clouda3.github.io/categories/sap/">sap (16)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://clouda3.github.io/tags/aws/">aws</a>
+    
+    <a href="http://clouda3.github.io/tags/saa/">saa</a>
+    
+    <a href="http://clouda3.github.io/tags/sap/">sap</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://clouda3.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://clouda3.github.io/">My New Hugo Site By </a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>
