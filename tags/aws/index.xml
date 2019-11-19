@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>aws on My New Hugo Site</title>
-    <link>http://clouda3.github.io/tags/aws/</link>
-    <description>Recent content in aws on My New Hugo Site</description>
+    <title>aws on 三多云的blog</title>
+    <link>https://clouda3.github.io/tags/aws/</link>
+    <description>Recent content in aws on 三多云的blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 03 Oct 2019 10:30:37 +0800</lastBuildDate>
     
-	<atom:link href="http://clouda3.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://clouda3.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SAA-CO1考试之路</title>
-      <link>http://clouda3.github.io/posts/aws-saa-pass/</link>
+      <link>https://clouda3.github.io/posts/aws-saa-pass/</link>
       <pubDate>Thu, 03 Oct 2019 10:30:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-saa-pass/</guid>
+      <guid>https://clouda3.github.io/posts/aws-saa-pass/</guid>
       <description>考试心得 考试成绩  852  背景  工作用到aws不到1年 有多年java开发经验 linux管理员,持有RHCE  准备周期  3周從準備到考試 每天8-12小时  做过实验的知识点列表  VPN endpoint/nat gateway/internet gateway/vpn/subnet/ACL RDS/Aurora/Reshift/Aurora/DynamoDB (snaphost copy az or cross region,ebs type change ,autoscaling ,entryption ,backup/replica ,Multi A-z,read/write unit)
  Cloudfront (OAI,SSL certificat ,validation TTL ,pre-signed URL)
  S3 (static websit ,ACL ,bucket policy,lifecyle)
@@ -27,10 +27,10 @@
     
     <item>
       <title>aws x-ray</title>
-      <link>http://clouda3.github.io/posts/aws-x-ray/</link>
+      <link>https://clouda3.github.io/posts/aws-x-ray/</link>
       <pubDate>Thu, 12 Sep 2019 12:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-x-ray/</guid>
+      <guid>https://clouda3.github.io/posts/aws-x-ray/</guid>
       <description>  AWS X-Ray 可以帮助开发人员分析与调试分布式生产应用程序，例如使用微服务架构构建的应用程序。借助 X-Ray，您可以了解应用程序及其底层服务的执行方式，从而识别和排查导致性能问题和错误的根本原因。X-Ray 可在请求通过应用程序时提供请求的端到端视图，并展示应用程序底层组件的映射。您可以使用 X-Ray 分析开发和生产中的应用程序，从简单的三层应用程序到包含上千种服务的复杂微服务应用程序。
  簡單來說，xray是用來追踪服務與服務之間鏈條，每個服務之間的請求內容，時間，參數等信息
   用api-gateway 和 lambda 實驗  本文用到的例子是前面的博文: Aws cloudformation deploy lambda and apigateway 只需要額外做以下兩步 開啟api-gateway的x-ray,api gateway console-&amp;gt; apis-&amp;gt;spring-boot-lambda-&amp;gt;stages-&amp;gt;Prod-&amp;gt;logs/tracing-&amp;gt;enable x-ray tracing 開啟lambda的x-ray,functions-&amp;gt;spring-boot-lambda-LambdaSpringBootFunction-7CK2QHXPRA6F-&amp;gt;aws x-ray:active tracing
@@ -41,10 +41,10 @@
     
     <item>
       <title>accelerating aws migration</title>
-      <link>http://clouda3.github.io/posts/aws-migration/</link>
+      <link>https://clouda3.github.io/posts/aws-migration/</link>
       <pubDate>Tue, 10 Sep 2019 14:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-migration/</guid>
+      <guid>https://clouda3.github.io/posts/aws-migration/</guid>
       <description> aws migration from OP to cloud這是aws最注重的部分，關於遷移技術，aws提供了各種各樣的工具，比如遷移數據庫(sts,dms),遷移workload（aws server migration service）,協助你計劃遷移收集信息的工具(aws application discovery service),track遷移進程的工具(migration hub),遷移海量數據的aws snowball or snowmobile,s3 acceleration, 加速數據傳輸的 dierct connect等等，從網絡到數據庫到文件，給你武裝到牙齒
   以下是兩篇關於數據遷移的好文
  https://medium.com/@awsontop/aws-cloud-migration-strategy-and-process-6ed38479735a
@@ -54,10 +54,10 @@
     
     <item>
       <title>aws online analytical processing (or OLAP)</title>
-      <link>http://clouda3.github.io/posts/aws-glue-athena-quicksight/</link>
+      <link>https://clouda3.github.io/posts/aws-glue-athena-quicksight/</link>
       <pubDate>Tue, 10 Sep 2019 14:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-glue-athena-quicksight/</guid>
+      <guid>https://clouda3.github.io/posts/aws-glue-athena-quicksight/</guid>
       <description>  OLAP在線分析工具越來越來成熟，從開始的數據倉庫，到強大的elk，再到雲，比如aws的 gaq(glue-athena-quicksight)，當然aws也有elk在線服務
  gaq vs elk,實際上是一類的產品，glue提供了crawler去爬去數據，類似 logstash，athena提供查詢工具類似elasticsearch ,quicksight 跟 kibana一樣ui.gaq是aws雲端的服務，沒有辦法部署在線下，elk既可以部署在op也可以部署在cloud上
  這篇文章來自 https://medium.com/localz-engineering/serverless-big-data-start-here-aws-glue-athena-quicksite-4c70ecac9fe3
@@ -73,37 +73,37 @@
     
     <item>
       <title>Difference between user pool and identity pool(Federated Identities)</title>
-      <link>http://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/</link>
+      <link>https://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/</link>
       <pubDate>Fri, 06 Sep 2019 12:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/</guid>
+      <guid>https://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/</guid>
       <description>剛開始使用cognito服務的時候特別讓人困惑，有user pool 和 identity pool(Federated Identities)，user pool裡面還有federation，federation裡面有identity provider. identity pool 裡面有autenticated provider裡面也有user pool ID! 納尼?這是什麼鬼?  let&amp;rsquo;s forget the connection between them  user pool 簡單來說就是提供一個用戶驗證的服務，比如用戶自定義用戶，用fb,GOOGLE，twitter等賬戶登錄，登錄後獲取一個token，用戶的每次請求帶著這個token就可以了，用戶登錄後獲取的是你個人應用的resource! ,比如你自己做了一個網站，登錄後可以管理自己用戶，權限，圖片等等，你有權限去訪問這些資源 identity pool 也是提供一個用戶認證的服務，用戶可以在裡面設置aws 的role，也就說用戶登錄後得到的aws的resource 的訪問權限，比如你可以訪問s3.只是這個登錄可以跟 user pool提供的服務去綁定，也可以不用user pool的服務直接用 identity pool裡面的provider去對接，也就說，如果你有google的id也可以登錄後獲取aws resource 資源的訪問權限，這個是登錄後aws通過sts生成臨時credential 來做到的  summary  user pool 只是負責authentication，沒有authorization，即便有也是用戶本身應用的服務 identity pool，既可以authentication，又可以authoriztion，授權的是aws的resource  上幾張圖 幾個非常有價值的link https://serverless-stack.com/chapters/cognito-user-pool-vs-identity-pool.html https://gorillalogic.com/blog/java-integration-with-amazon-cognito/</description>
     </item>
     
     <item>
       <title>Aws cognito sample</title>
-      <link>http://clouda3.github.io/posts/aws-cognito-sample/</link>
+      <link>https://clouda3.github.io/posts/aws-cognito-sample/</link>
       <pubDate>Fri, 06 Sep 2019 10:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-cognito-sample/</guid>
+      <guid>https://clouda3.github.io/posts/aws-cognito-sample/</guid>
       <description>  这是一个aws官方的文档，我认为最好的cognito的例子，如果理解这个sample，那么cognito就没有任何问题 https://aws.amazon.com/getting-started/projects/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/  详解  廢話少說直接上圖   程序組成部分 - 靜態的代碼存放s3 - 動態的代碼存放lambda - 代碼的訪問入口通過api-gateway - 數據的存放時dynamoDB(程序登錄後有個點擊頁面位置生成的數據,與用戶驗證沒有太多關係)  Cognito user pool 在user login 流程 - 用戶用用戶名+密碼(或mfa，這取決於cognito user pool的配置)請求登錄 - aws cognito user pool去驗證用戶 - 如果用戶通過驗證返回一個token - 下一次用戶用這個token來請求訪問 - aws cognito user pool 可以基本满足用户登录，如果涉及到权限可以跟自己数据进行绑定 - 这个例子里面特别要注意的是，api gateway 直接设置了 Authorizers ：里面可以指定cognito 来对用戶進行驗證，不用額外寫程序來驗證，也就說每次訪問一個服務/ride.html,api-getway通過Authorizers直接去用cognito去驗證用戶的token - 這個例子分了兩個步驟，第一個步驟是直接登錄，登錄後獲得一個toke - 第二步驟是用api-gateway 自動驗證用戶的登錄，也就是authentication  </description>
     </item>
     
     <item>
       <title>Aws cloudformation deploy lambda and apigateway</title>
-      <link>http://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/</link>
+      <link>https://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/</link>
       <pubDate>Thu, 05 Sep 2019 12:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/</guid>
+      <guid>https://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/</guid>
       <description>用Cloudformation 来部署 java 的lambda 和api gateway,这里要用到spring-boot写java 代码，需要用到s3，存放lambda代码，需要创建lambda function和api agetway，还需要用到sam  Aws lambda with Spring Boot  本文用到的git代码来自 https://github.com/gemerick/spring-boot-lambda 本文的内容来自 https://keyholesoftware.com/2018/04/26/aws-lambda-with-spring-boot/   本文的步骤  安装sam git 克隆现有代码 创建s3 bucket 用cloudformation 上传 代码 用cloudformation 部署 测试代码  安装sam pip3 install --user aws-sam-cli  git 克隆代码 git clone https://github.com/gemerick/spring-boot-lambda -b lambda mvn clean package  创建s3 bucket aws s3 mb s3://spring-boot-lambda-20100905  拷贝jar 到S3 ，更新sam的template aws cloudformation package --template-file sam.yaml --output-template-file target/output-sam.</description>
     </item>
     
     <item>
       <title>Aws ecs tutorial</title>
-      <link>http://clouda3.github.io/posts/aws-ecs-tutorial/</link>
+      <link>https://clouda3.github.io/posts/aws-ecs-tutorial/</link>
       <pubDate>Wed, 04 Sep 2019 09:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-ecs-tutorial/</guid>
+      <guid>https://clouda3.github.io/posts/aws-ecs-tutorial/</guid>
       <description>Aws ecs 简单来说就是host docker container，跟K8S类似，如果用过k8s，那么ecs非常的好理解 本文主要按照 Gentle Introduction to How AWS ECS Works with Example Tutorial 搭建  关于ECS的专业的词汇  Task Definition ：实际就是要给launch configration,比如暴露端口号，用什么docker image，cpu 内存需要多少，运行docker 的command，环境变量
  Task ：简单来说就是一个running instance
  Service ：一组task
@@ -114,10 +114,10 @@
     
     <item>
       <title>aws数据库迁移工具简介</title>
-      <link>http://clouda3.github.io/posts/aws-sct-dms-tutorial/</link>
+      <link>https://clouda3.github.io/posts/aws-sct-dms-tutorial/</link>
       <pubDate>Tue, 03 Sep 2019 14:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-sct-dms-tutorial/</guid>
+      <guid>https://clouda3.github.io/posts/aws-sct-dms-tutorial/</guid>
       <description>Aws数据库迁移工具简介  越来越多的公司选择把服务迁移到云上,那么数据库的迁移尤其重要，亚马逊提供了数据迁移的工具 sct（schema converstion tool） 和 dms （data migration service）两个工具协作帮助客户从线下数据库导入到线上数据库,source 和 target 的database可以不是一种数据库类型，比如从mysql到oracle，或者mysql 到postgresql
  简单介绍一下sct，简单点来说就是数据库schema转换工具，把本地的数据库的schema转换为aws线上目标数据库的schema，然后在线上导入这个schema生成数据库,然后用DMS帮你把数据导出到aws上
   把aws mysql RDS 数据库 导出到 aws postgresql RDS  实验的目标就是把mysql数据库迁移到postgresql，由于在aws cloud上做比较方面，所以选择了都在云上来迁移做实验
@@ -130,29 +130,29 @@ test id name 1 hello 2 kitty  create postgresql database on aws
     
     <item>
       <title>eni or eip can not be deleted</title>
-      <link>http://clouda3.github.io/posts/aws-eni-can-not-be-deleted/</link>
+      <link>https://clouda3.github.io/posts/aws-eni-can-not-be-deleted/</link>
       <pubDate>Mon, 02 Sep 2019 14:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-eni-can-not-be-deleted/</guid>
+      <guid>https://clouda3.github.io/posts/aws-eni-can-not-be-deleted/</guid>
       <description> 我几乎删除了所有的service，但是eni就是不让我删除 关联的eip也不让删除 我去aws社区看了很多帖子最后发现主要原因有两个地方 efs 使用eni nat gatway 使用了eni 根据这两点，我去查找，果然有个natgateway 使用eni，删除掉nat gateway后，eni可以删除，eip可以release了  </description>
     </item>
     
     <item>
       <title>一个ec2 instance上配置多个eni</title>
-      <link>http://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/</link>
+      <link>https://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/</link>
       <pubDate>Mon, 02 Sep 2019 08:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/</guid>
+      <guid>https://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/</guid>
       <description>一个ec2 instance 配置多网卡  首先要确定你需要几个公网IP，以2个为例 首先要确定你需要几个网卡，以2个为例 申请两个 elastic ip：IP1 ip2 申请两个eni(network interface)：eni1，eni2 创建一个ec2 把ip1 绑定到eni1,elastic ip-&amp;gt;选中IP-&amp;gt;associate-&amp;gt;resource type:network interface -&amp;gt; private ip 自动选择 把ip2 绑定到eni2,此处省略步骤 把eni1绑定到ec2，network interface 页面-&amp;gt;选择eni1-&amp;gt;attach-&amp;gt; 选择 ec2 instance id 把eni2绑定到ec2,此处省略步骤 在ec2 instance 页面,看到iP里面公网IP只有一个，private ip 有2个 为什么少了一个?用putty connnect 这个两个ip，都是没有问题，ec2 的console不显示而已
 [ec2-user@ip-172-31-1-176 ~]$ ifconfig eth0: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt; mtu 9001 inet 172.31.1.176 netmask 255.255.255.0 broadcast 172.31.1.255 inet6 fe80::8a:93ff:fefd:ef5c prefixlen 64 scopeid 0x20&amp;lt;link&amp;gt; ether 02:8a:93:fd:ef:5c txqueuelen 1000 (Ethernet) RX packets 4115218 bytes 1170825027 (1.</description>
     </item>
     
     <item>
       <title>service catalog 简介</title>
-      <link>http://clouda3.github.io/posts/aws-service-catalog/</link>
+      <link>https://clouda3.github.io/posts/aws-service-catalog/</link>
       <pubDate>Thu, 29 Aug 2019 10:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-service-catalog/</guid>
+      <guid>https://clouda3.github.io/posts/aws-service-catalog/</guid>
       <description> Aws service catalog 简介  aws service catalog 从字面上看就是服务目录,也就是说一些服务放入一组，进行统一的规划，那里一些可以进行统一的规划呢？  几个关键词  portfolio product constraint  傳統資源創建存在問題  從亞馬遜的blog上盜圖
   上圖存在的幾個問題非常明顯
  創建了一組資源，資源與資源之間無法互訪
@@ -168,28 +168,28 @@ test id name 1 hello 2 kitty  create postgresql database on aws
     
     <item>
       <title>aws infrastructure as code</title>
-      <link>http://clouda3.github.io/posts/aws-infrastructure-as-code/</link>
+      <link>https://clouda3.github.io/posts/aws-infrastructure-as-code/</link>
       <pubDate>Thu, 29 Aug 2019 08:30:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-infrastructure-as-code/</guid>
+      <guid>https://clouda3.github.io/posts/aws-infrastructure-as-code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>使用Aws sts创建临时credential</title>
-      <link>http://clouda3.github.io/posts/aws-sap-sts-service/</link>
+      <link>https://clouda3.github.io/posts/aws-sap-sts-service/</link>
       <pubDate>Mon, 26 Aug 2019 08:30:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-sap-sts-service/</guid>
+      <guid>https://clouda3.github.io/posts/aws-sap-sts-service/</guid>
       <description>Aws sts 简介  简单来说就是aws通过sts服务生成临时的credential给用户使用，他们可以设置有效期，自动失效,这也是amazon best practice 里面建议的方式  实验准备  创建 User 创建 Role 创建 s3 作为测试 为User创建sts assumeRole 的访问策略 在EC2上使用Aws cli 创建 历史的credential 访问s3  Create an IAM user  https://console.aws.amazon.com/iam/home?region=ap-southeast-1#/users input name： mystsuser access type programmatic access 其他保持默认  Create role for antoher aws account  https://console.aws.amazon.com/iam/home?region=ap-southeast-1#/roles 选择：another aws account Account ID: 找到上面的user 的arn，XXX就是ID (arn:aws:iam::XXXX:user/mystsuser) Attach plicy 搜索s3，选择 AmanzonS3ReadOnlyAccess,next reviews and create Role，input role name：sts-s3-read-only 创建完毕后，Update/Modify Trust Relationships replace (this is the arn of the user what you created) with arn:aws:iam::XXXX:user/mystsuser</description>
     </item>
     
     <item>
       <title> 使用Aws System Manager 统一管理 aws resource </title>
-      <link>http://clouda3.github.io/posts/aws-sap-system-manager/</link>
+      <link>https://clouda3.github.io/posts/aws-sap-system-manager/</link>
       <pubDate>Sun, 25 Aug 2019 16:30:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-sap-system-manager/</guid>
+      <guid>https://clouda3.github.io/posts/aws-sap-system-manager/</guid>
       <description>使用Aws System Manager 统一管理 aws resource Aws system Manager 简介  AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified use:qr interface so you can view operational data from multiple AWS services and allows you to automate operational tasks across your AWS resources
  Aws system manager AWS 让您能够查看和控制 AWS 上的基础设施。Systems Manager 可以提供一个统一的用户界面，供您查看多种 AWS 服务的运行数据，并在 AWS 资源上自动执行操作任务。
   使用场景  比如我有个20台 linux ec2，不管什么类型的，只要安装centyos，那么都要给他安装 ，cloudwatch agent 来对系统的disk和memory进行监控  实验的前置条件  你的系统上必须安装SSM Agent 你的EC2的role 必须具有 AmazonEC2RoleforSSM 的policy attach上去  安装SSM agent Intel (x86_64) 64 位实例： sudo yum install -y https://s3.</description>
@@ -197,10 +197,10 @@ test id name 1 hello 2 kitty  create postgresql database on aws
     
     <item>
       <title>NAT instance setup 简介</title>
-      <link>http://clouda3.github.io/posts/aws-nat-instance-setup/</link>
+      <link>https://clouda3.github.io/posts/aws-nat-instance-setup/</link>
       <pubDate>Tue, 20 Aug 2019 14:40:37 +0800</pubDate>
       
-      <guid>http://clouda3.github.io/posts/aws-nat-instance-setup/</guid>
+      <guid>https://clouda3.github.io/posts/aws-nat-instance-setup/</guid>
       <description>AWS NAT instance setup 简介  NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。  AWS NAT gateway  Aws 有專門的nat gateway,並且是HA的，只要創建gateway然後更改一下，subnet的路由就可以了，所以自己搭建一個nat gateway實際並不是aws的範疇，實際是一個linux系統的問題  手動搭建一個nat instance  private subnet1/ instance1 / sg1(secrutiry group) / internal IP1 -&amp;gt;local node1 public subnet2/ instance2 / sg2(sercirity group) / internal IP2 /public ip2 -&amp;gt; proxy node2  配置proxy node vi /etc/sysctl.conf net.ipv4.ip_forward=1 iptables -t nat -A POSTROUTING -o eth0 -s 192.168.1.0/24 -j MASQUERADE   192.168.1.0/24 為本地網絡CIDR
  EC2 頁面，選中proxy node2 -&amp;gt;Action -&amp;gt;Networking -&amp;gt;Disable source/Desk Check</description>
     </item>

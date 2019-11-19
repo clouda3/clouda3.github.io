@@ -7,18 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>My New Hugo Site | </title>
-    <meta property="og:title" content="My New Hugo Site | ">
+    <title>三多云的blog | </title>
+    <meta property="og:title" content="三多云的blog | ">
     <meta property="og:type" content="website">
     <meta name="Keywords" content="">
     <meta name="description" content="">
-    <meta property="og:url" content="http://clouda3.github.io/">
+    <meta property="og:url" content="https://clouda3.github.io/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml+xml" href="http://clouda3.github.io/index.xml" title="My New Hugo Site" />
+    <link rel="alternate" type="application/rss+xml+xml" href="https://clouda3.github.io/index.xml" title="三多云的blog" />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -36,8 +36,8 @@
             <div class="site-name ">
                 
                     <h1>
-                        <a id="logo" href="http://clouda3.github.io/">
-                            My New Hugo Site
+                        <a id="logo" href="https://clouda3.github.io/">
+                            三多云的blog
                         </a>
                     </h1>
                 
@@ -45,17 +45,15 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="http://clouda3.github.io/">首页</a>
+                    <a class="current" href="https://clouda3.github.io/">首页</a>
                     
-                    <a  href="http://clouda3.github.io/posts/" title="Blog">Blog</a>
+                    <a  href="https://clouda3.github.io/posts/" title="Blog">Blog</a>
                     
-                    <a  href="http://clouda3.github.io/tags/" title="Tags">Tags</a>
+                    <a  href="https://clouda3.github.io/tags/" title="Tags">Tags</a>
                     
-                    <a  href="http://clouda3.github.io/about" title="About">About</a>
+                    <a  href="https://clouda3.github.io/about" title="About">About</a>
                     
-                    <a  href="http://clouda3.github.io/index.xml" title="RSS">RSS</a>
-                    
-                    <a  href="http://clouda3.github.io/posts/aws-x-ray/" title="aws x-ray">aws x-ray</a>
+                    <a  href="https://clouda3.github.io/index.xml" title="RSS">RSS</a>
                     
                 </nav>
             </div>
@@ -75,39 +73,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-sct-dms-tutorial/" title="aws数据库迁移工具简介" >aws数据库迁移工具简介</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月3日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Aws数据库迁移工具简介  越来越多的公司选择把服务迁移到云上,那么数据库的迁移尤其重要，亚马逊提供了数据迁移的工具 sct（schema converstion tool） 和 dms （data migration service）两个工具协作帮助客户从线下数据库导入到线上数据库,source 和 target 的database可以不是一种数据库类型，比如从mysql到oracle，或者mysql 到postgresql
- 简单介绍一下sct，简单点来说就是数据库schema转换工具，把本地的数据库的schema转换为aws线上目标数据库的schema，然后在线上导入这个schema生成数据库,然后用DMS帮你把数据导出到aws上
-  把aws mysql RDS 数据库 导出到 aws postgresql RDS  实验的目标就是把mysql数据库迁移到postgresql，由于在aws cloud上做比较方面，所以选择了都在云上来迁移做实验
- Down load Aws schema convertion tool
- create mysql database on aws
- create database：test and table myclass with 2 column:id name
-test id name 1 hello 2 kitty  create postgresql database on aws
- Open aws sct……
-                            </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-sct-dms-tutorial/">阅读全文</a></p>
-                        </article>
-                    
-                    
-		    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-eni-can-not-be-deleted/" title="eni or eip can not be deleted" >eni or eip can not be deleted</a>
+                                    <a href="https://clouda3.github.io/posts/aws-eni-can-not-be-deleted/" title="eni or eip can not be deleted" >eni or eip can not be deleted</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -117,14 +83,14 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
                                  我几乎删除了所有的service，但是eni就是不让我删除 关联的eip也不让删除 我去aws社区看了很多帖子最后发现主要原因有两个地方 efs 使用eni nat gatway 使用了eni 根据这两点，我去查找，果然有个natgateway 使用eni，删除掉nat gateway后，eni可以删除，eip可以release了  ……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-eni-can-not-be-deleted/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-eni-can-not-be-deleted/">阅读全文</a></p>
                         </article>
                     
                     
@@ -132,7 +98,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/" title="一个ec2 instance上配置多个eni" >一个ec2 instance上配置多个eni</a>
+                                    <a href="https://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/" title="一个ec2 instance上配置多个eni" >一个ec2 instance上配置多个eni</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -142,7 +108,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
@@ -150,7 +116,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                                 一个ec2 instance 配置多网卡  首先要确定你需要几个公网IP，以2个为例 首先要确定你需要几个网卡，以2个为例 申请两个 elastic ip：IP1 ip2 申请两个eni(network interface)：eni1，eni2 创建一个ec2 把ip1 绑定到eni1,elastic ip-&gt;选中IP-&gt;associate-&gt;resource type:network interface -&gt; private ip 自动选择 把ip2 绑定到eni2,此处省略步骤 把eni1绑定到ec2，network interface 页面-&gt;选择eni1-&gt;attach-&gt; 选择 ec2 instance id 把eni2绑定到ec2,此处省略步骤 在ec2 instance 页面,看到iP里面公网IP只有一个，private ip 有2个 为什么少了一个?用putty connnect 这个两个ip，都是没有问题，ec2 的console不显示而已
 [ec2-user@ip-172-31-1-176 ~]$ ifconfig eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 9001 inet 172.31.1.176 netmask 255.255.255.0 broadcast 172.31.1.255 inet6 fe80::8a:93ff:fefd:ef5c prefixlen 64 scopeid 0x20&lt;link&gt; ether 02:8a:93:fd:ef:5c txqueuelen 1000 (Ethernet) RX packets 4115218 bytes 1170825027 (1.……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-multi-eni-on-one-ec2-instance/">阅读全文</a></p>
                         </article>
                     
                     
@@ -158,7 +124,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-service-catalog/" title="service catalog 简介" >service catalog 简介</a>
+                                    <a href="https://clouda3.github.io/posts/aws-service-catalog/" title="service catalog 简介" >service catalog 简介</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -168,7 +134,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
@@ -185,7 +151,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
  具體例子請看 (https://aws.amazon.com/blogs/mt/create-a-security-partition-for-your-applications-using-aws-service-catalog-and-aws-lambda/)
   ……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-service-catalog/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-service-catalog/">阅读全文</a></p>
                         </article>
                     
                     
@@ -193,7 +159,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-infrastructure-as-code/" title="aws infrastructure as code" >aws infrastructure as code</a>
+                                    <a href="https://clouda3.github.io/posts/aws-infrastructure-as-code/" title="aws infrastructure as code" >aws infrastructure as code</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -203,14 +169,14 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
                                 ……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-infrastructure-as-code/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-infrastructure-as-code/">阅读全文</a></p>
                         </article>
                     
                     
@@ -218,7 +184,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-sap-sts-service/" title="使用Aws sts创建临时credential" >使用Aws sts创建临时credential</a>
+                                    <a href="https://clouda3.github.io/posts/aws-sap-sts-service/" title="使用Aws sts创建临时credential" >使用Aws sts创建临时credential</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -228,14 +194,14 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
                                 Aws sts 简介  简单来说就是aws通过sts服务生成临时的credential给用户使用，他们可以设置有效期，自动失效,这也是amazon best practice 里面建议的方式  实验准备  创建 User 创建 Role 创建 s3 作为测试 为User创建sts assumeRole 的访问策略 在EC2上使用Aws cli 创建 历史的credential 访问s3  Create an IAM user  https://console.aws.amazon.com/iam/home?region=ap-southeast-1#/users input name： mystsuser access type programmatic access 其他保持默认  Create role for antoher aws account  https://console.aws.amazon.com/iam/home?region=ap-southeast-1#/roles 选择：another aws account Account ID: 找到上面的user 的arn，XXX就是ID (arn:aws:iam::XXXX:user/mystsuser) Attach plicy 搜索s3，选择 AmanzonS3ReadOnlyAccess,next reviews and create Role，input role name：sts-s3-read-only 创建完毕后，Update/Modify Trust Relationships replace (this is the arn of the user what you created) with arn:aws:iam::XXXX:user/mystsuser……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-sap-sts-service/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-sap-sts-service/">阅读全文</a></p>
                         </article>
                     
                     
@@ -243,7 +209,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-sap-system-manager/" title=" 使用Aws System Manager 统一管理 aws resource " > 使用Aws System Manager 统一管理 aws resource </a>
+                                    <a href="https://clouda3.github.io/posts/aws-sap-system-manager/" title=" 使用Aws System Manager 统一管理 aws resource " > 使用Aws System Manager 统一管理 aws resource </a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -253,7 +219,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
@@ -262,7 +228,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
  Aws system manager AWS 让您能够查看和控制 AWS 上的基础设施。Systems Manager 可以提供一个统一的用户界面，供您查看多种 AWS 服务的运行数据，并在 AWS 资源上自动执行操作任务。
   使用场景  比如我有个20台 linux ec2，不管什么类型的，只要安装centyos，那么都要给他安装 ，cloudwatch agent 来对系统的disk和memory进行监控  实验的前置条件  你的系统上必须安装SSM Agent 你的EC2的role 必须具有 AmazonEC2RoleforSSM 的policy attach上去  安装SSM agent Intel (x86_64) 64 位实例： sudo yum install -y https://s3.……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-sap-system-manager/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-sap-system-manager/">阅读全文</a></p>
                         </article>
                     
                     
@@ -270,7 +236,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="http://clouda3.github.io/posts/aws-nat-instance-setup/" title="NAT instance setup 简介" >NAT instance setup 简介</a>
+                                    <a href="https://clouda3.github.io/posts/aws-nat-instance-setup/" title="NAT instance setup 简介" >NAT instance setup 简介</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -280,7 +246,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="http://clouda3.github.io/categories/sap">sap</a></span>
+                                <span class="meta-category"><a href="https://clouda3.github.io/categories/sap">sap</a></span>
                                 
                             </div>
                             
@@ -288,7 +254,25 @@ test id name 1 hello 2 kitty  create postgresql database on aws
                                 AWS NAT instance setup 简介  NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。  AWS NAT gateway  Aws 有專門的nat gateway,並且是HA的，只要創建gateway然後更改一下，subnet的路由就可以了，所以自己搭建一個nat gateway實際並不是aws的範疇，實際是一個linux系統的問題  手動搭建一個nat instance  private subnet1/ instance1 / sg1(secrutiry group) / internal IP1 -&gt;local node1 public subnet2/ instance2 / sg2(sercirity group) / internal IP2 /public ip2 -&gt; proxy node2  配置proxy node vi /etc/sysctl.conf net.ipv4.ip_forward=1 iptables -t nat -A POSTROUTING -o eth0 -s 192.168.1.0/24 -j MASQUERADE   192.168.1.0/24 為本地網絡CIDR
  EC2 頁面，選中proxy node2 -&gt;Action -&gt;Networking -&gt;Disable source/Desk Check……
                             </div>
-                            <p class="readmore"><a href="http://clouda3.github.io/posts/aws-nat-instance-setup/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://clouda3.github.io/posts/aws-nat-instance-setup/">阅读全文</a></p>
+                        </article>
+                    
+                    
+		    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://clouda3.github.io/about/" title="关于我" >关于我</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月14日
+                            </date>
+                            
+                            <div class="post-content">
+                                 个人认证  aws solution architect association aws solution architect professional redhat certified engineer  编程语言  JAVA/GO/Shell/Python  ……
+                            </div>
+                            <p class="readmore"><a href="https://clouda3.github.io/about/">阅读全文</a></p>
                         </article>
                     
                     
@@ -299,17 +283,17 @@ test id name 1 hello 2 kitty  create postgresql database on aws
 <ol class="page-navigator">
     
     <li class="prev">
-        <a href="http://clouda3.github.io/">上一页</a>
+        <a href="https://clouda3.github.io/">上一页</a>
     </li>
     
 
     
     <li >
-        <a href="http://clouda3.github.io/">1</a>
+        <a href="https://clouda3.github.io/">1</a>
     </li>
     
     <li  class="current">
-        <a href="http://clouda3.github.io/page/2/">2</a>
+        <a href="https://clouda3.github.io/page/2/">2</a>
     </li>
     
 
@@ -326,7 +310,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
         <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="http://clouda3.github.io/">
+      <input type="hidden" name="sitesearch" value="https://clouda3.github.io/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -336,43 +320,43 @@ test id name 1 hello 2 kitty  create postgresql database on aws
 <ul class="widget-list">
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-saa-pass/" title="SAA-CO1考试之路">SAA-CO1考试之路</a>
+        <a href="https://clouda3.github.io/posts/aws-saa-pass/" title="SAA-CO1考试之路">SAA-CO1考试之路</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-sap-passed/" title="aws sap passed">aws sap passed</a>
+        <a href="https://clouda3.github.io/posts/aws-sap-passed/" title="aws sap passed">aws sap passed</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-x-ray/" title="aws x-ray">aws x-ray</a>
+        <a href="https://clouda3.github.io/posts/aws-x-ray/" title="aws x-ray">aws x-ray</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-migration/" title="accelerating aws migration">accelerating aws migration</a>
+        <a href="https://clouda3.github.io/posts/aws-migration/" title="accelerating aws migration">accelerating aws migration</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-glue-athena-quicksight/" title="aws online analytical processing (or OLAP)">aws online analytical processing (or OLAP)</a>
+        <a href="https://clouda3.github.io/posts/aws-glue-athena-quicksight/" title="aws online analytical processing (or OLAP)">aws online analytical processing (or OLAP)</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/" title="Difference between user pool and identity pool(Federated Identities)">Difference between user pool and identity pool(Federated Identities)</a>
+        <a href="https://clouda3.github.io/posts/aws-difference-between-userpool-and-identitypool/" title="Difference between user pool and identity pool(Federated Identities)">Difference between user pool and identity pool(Federated Identities)</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-cognito-sample/" title="Aws cognito sample">Aws cognito sample</a>
+        <a href="https://clouda3.github.io/posts/aws-cognito-sample/" title="Aws cognito sample">Aws cognito sample</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/" title="Aws cloudformation deploy lambda and apigateway">Aws cloudformation deploy lambda and apigateway</a>
+        <a href="https://clouda3.github.io/posts/aws-cloudformation-lambda-apigateway/" title="Aws cloudformation deploy lambda and apigateway">Aws cloudformation deploy lambda and apigateway</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-ecs-tutorial/" title="Aws ecs tutorial">Aws ecs tutorial</a>
+        <a href="https://clouda3.github.io/posts/aws-ecs-tutorial/" title="Aws ecs tutorial">Aws ecs tutorial</a>
     </li>
     
     <li>
-        <a href="http://clouda3.github.io/posts/aws-sct-dms-tutorial/" title="aws数据库迁移工具简介">aws数据库迁移工具简介</a>
+        <a href="https://clouda3.github.io/posts/aws-sct-dms-tutorial/" title="aws数据库迁移工具简介">aws数据库迁移工具简介</a>
     </li>
     
 </ul>
@@ -384,11 +368,11 @@ test id name 1 hello 2 kitty  create postgresql database on aws
         <h3 class="widget-title">分类</h3>
 <ul class="widget-list">
     
-    <li><a href="http://clouda3.github.io/categories/aws/">aws (1)</a></li>
+    <li><a href="https://clouda3.github.io/categories/aws/">aws (1)</a></li>
     
-    <li><a href="http://clouda3.github.io/categories/saa/">saa (1)</a></li>
+    <li><a href="https://clouda3.github.io/categories/saa/">saa (1)</a></li>
     
-    <li><a href="http://clouda3.github.io/categories/sap/">sap (16)</a></li>
+    <li><a href="https://clouda3.github.io/categories/sap/">sap (16)</a></li>
     
 </ul>
     </section>
@@ -397,11 +381,11 @@ test id name 1 hello 2 kitty  create postgresql database on aws
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
-    <a href="http://clouda3.github.io/tags/aws/">aws</a>
+    <a href="https://clouda3.github.io/tags/aws/">aws</a>
     
-    <a href="http://clouda3.github.io/tags/saa/">saa</a>
+    <a href="https://clouda3.github.io/tags/saa/">saa</a>
     
-    <a href="http://clouda3.github.io/tags/sap/">sap</a>
+    <a href="https://clouda3.github.io/tags/sap/">sap</a>
     
 </div>
     </section>
@@ -411,7 +395,7 @@ test id name 1 hello 2 kitty  create postgresql database on aws
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="http://clouda3.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="https://clouda3.github.io/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -420,10 +404,8 @@ test id name 1 hello 2 kitty  create postgresql database on aws
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="http://clouda3.github.io/">My New Hugo Site By </a>.
+        &copy; 2019 <a href="https://clouda3.github.io/">三多云的blog By </a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
     </div>
 </footer>
 
