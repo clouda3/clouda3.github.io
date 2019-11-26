@@ -286,6 +286,22 @@
 
     
     
+					<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    
+      clientID: `194e36d3bbcd14e7def9`,   
+      clientSecret: `2c99c40d21596f4dc7b9f31a76467ec19c72e653`,
+      repo: `blog`,  
+      owner: 'clouda3',   
+      admin: ['clouda3'],  
+      id: 'indow.location.pathname', 
+        });
+      gitalk.render('gitalk-container');
+</script> 
                 </div>
             </div>
             <div id="secondary">
@@ -297,7 +313,11 @@
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+     <section class="widget">
+	  
+        <div class="addthis_inline_follow_toolbox"></div>
+ <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script>
+    </section>   
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
@@ -360,6 +380,7 @@
 </ul>
     </section>
 
+
     <section class="widget">
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
@@ -372,7 +393,6 @@
     
 </div>
     </section>
-
     
 
     <section class="widget">
@@ -385,22 +405,7 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
 
-<div id="gitalk-container"></div>     
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-    
-      clientID: `194e36d3bbcd14e7def9`,   
-      clientSecret: `2c99c40d21596f4dc7b9f31a76467ec19c72e653`,
-      repo: `blog`,  
-      owner: 'clouda3',   
-      admin: ['clouda3'],  
-      id: 'indow.location.pathname', 
-        });
-      gitalk.render('gitalk-container');
-</script> 
 <footer id="footer">
     <div class="container">
         &copy; 2019 <a href="https://clouda3.github.io/">三朵云的blog By </a>.
