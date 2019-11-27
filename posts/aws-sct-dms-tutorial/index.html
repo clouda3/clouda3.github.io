@@ -322,14 +322,12 @@ id  name
 <div id="gitalk-container"></div>     
 <script type="text/javascript">
     var gitalk = new Gitalk({
-    
       clientID: '51d585ef48765a9295a2',   
       clientSecret: 'fa2938815b7b94d477b79600f3c5fe6f2929ab84',
-      repo: 'gohugo.me',  
+      repo: 'blog',  
       owner: 'clouda3',   
       admin: ['clouda3'],  
-      id: `location.pathname`, 
-	  distractionFreeMode: false
+      id: location.pathname 
         });
       gitalk.render('gitalk-container');
 </script> 
