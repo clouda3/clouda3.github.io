@@ -1,0 +1,446 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>手把手使用Hugo搭建网站-高级篇 | 三朵云的blog</title><meta property="og:title" content="手把手使用Hugo搭建网站-高级篇 - 三朵云的blog"><meta property="og:type" content="article"><meta property="article:published_time" content="2019-11-26T12:40:37&#43;08:00"><meta property="article:modified_time" content="2019-11-26T12:40:37&#43;08:00"><meta name=Keywords content><meta name=description content="Hogo sample websites and themes"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/hugo-advanced-level-lesson/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>三朵云的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#1-3-手把手使用hugo搭建网站高级篇>1.3. 手把手使用hugo搭建网站高级篇</a><ul><li><a href=#1-3-1-創建页面的目錄>1.3.1. 創建页面的目錄</a></li><li><a href=#1-3-2-创建搜索>1.3.2. 创建搜索</a></li><li><a href=#1-3-3-创建多语言支持>1.3.3. 创建多语言支持</a></li><li><a href=#1-3-4-语法高亮-highlight>1.3.4. 语法高亮 highlight</a></li><li><a href=#1-3-5-显示相关内容>1.3.5. 显示相关内容</a></li><li><a href=#1-3-6-显示当前页面所有的tag>1.3.6. 显示当前页面所有的tag</a></li><li><a href=#1-3-7-社交联系方式>1.3.7. 社交联系方式</a></li><li><a href=#1-3-8-社交分享>1.3.8. 社交分享</a></li><li><a href=#1-3-9-社交评论>1.3.9. 社交评论</a></li><li><a href=#1-3-10-gitalk-评论>1.3.10. gitalk 评论</a></li></ul></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
+let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
+function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
+window.onscroll=function(){ishide();if((document.documentElement.scrollTop!=0)&&(floatTocDivElem.style.display=='block')){top();}};window.onresize=function(){ishide();}
+document.getElementById("toc_btn_open").addEventListener('click',function(){switch(tocListElem.style.display){case "none":document.getElementById("toc_btn_close").style.display="";tocListElem.style.display="";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="1px solid gray";break;default:break;}},false);document.getElementById("toc_btn_close").addEventListener('click',function(){switch(tocListElem.style.display){case "":document.getElementById("toc_btn_close").style.display="none";tocListElem.style.display="none";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="";break;default:break;}},false);}else{let fixedTocElem=document.getElementsByClassName("toc-article")[0];fixedTocElem.appendChild(tocNavElem);fixedTocElem.parentElement.style.display="";}
+document.getElementById("virtual_toc_list").remove();};</script><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>手把手使用Hugo搭建网站-高级篇</h1></header><date class="post-meta meta-date">2019年11月26日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/hugo>hugo</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><p><a id=toc_anchor name=#13-手把手使用hugo搭建网站高级篇></a></p><h2 id=1-3-手把手使用hugo搭建网站高级篇>1.3. 手把手使用hugo搭建网站高级篇</h2><p><a id=toc_anchor name=#13.1-創建页面的目錄></a></p><h3 id=1-3-1-創建页面的目錄>1.3.1. 創建页面的目錄</h3><ul><li><p>hugo提供了目錄的支持table of content</p><ol><li>創建目錄首先你的文章必須有標題</li><li><p>在layouts/_default/single.html 添加代碼 {{.TableOfContents}}</p><pre><code>    {{ define &quot;main&quot; -}}
+    &lt;div class=&quot;post&quot;&gt;
+    &lt;h1&gt;{{ .Title }}&lt;/h1&gt;
+    &lt;time datetime={{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }} class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+    {{.TableOfContents}}
+
+    {{ .Content }}
+    &lt;/div&gt;
+
+    {{ if .Site.DisqusShortname -}}
+    &lt;h2&gt;Comments&lt;/h2&gt;
+    {{ template &quot;_internal/disqus.html&quot; . }}
+    {{- end }}
+    {{ partial &quot;related.html&quot; . }}
+    {{- end }}
+
+</code></pre></li></ol></li></ul><p><a id=toc_anchor name=#13.2-创建搜索></a></p><h3 id=1-3-2-创建搜索>1.3.2. 创建搜索</h3><ul><li><p>伪站内搜索 使用google cse</p><ol><li><p>网站注册然后把生成的代码放入到layout/partial/search.html</p><pre><code>&lt;script async src=&quot;https://cse.google.com/cse.js?cx=xxx:xxx&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;gcse-search&quot;&gt;&lt;/div&gt;
+
+</code></pre></li><li><p>把search.html 加入到baseof {{ partial &ldquo;search.html&rdquo; . }} .</p></li><li><p>搜索的结果必须是google收录的网页</p></li></ol></li><li><p>站内搜索hugo-lunr</p><ol><li><p>hugo自从0.20.0版本已经可以支持output format了,config.toml</p><pre><code>[outputs]
+ section = [ &quot;HTML&quot;, &quot;JSON&quot;]
+</code></pre></li><li><p>layouts/post/list.json</p><pre><code>[
+{{ range $index, $value := where .Site.Pages &quot;Type&quot; &quot;posts&quot; }}
+{{ if $index }}, {{ end }}
+{
+&quot;url&quot;: &quot;{{ .RelPermalink }}&quot;,
+&quot;title&quot;: &quot;{{ .Title }}&quot;,
+&quot;content&quot;: {{ .Content | plainify | jsonify }}
+}
+{{ end }}
+]
+</code></pre></li><li><p>上面两步配置完成后,执行hugo命令将会在posts目录下生成index.json</p></li><li><p>制作搜索页面</p><pre><code>       
+&lt;script src=&quot;https://unpkg.com/lunr/lunr.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+// define globale variables
+var idx, searchInput, searchResults = null
+var documents = []
+
+function renderSearchResults(results){
+
+ if (results.length &gt; 0) {
+
+    // show max 10 results
+    if (results.length &gt; 9){
+          results = results.slice(0,10)
+    }
+
+    // reset search results
+    searchResults.innerHTML = ''
+
+    // append results
+    results.forEach(result =&gt; {
+            
+          // create result item
+          var article = document.createElement('article')
+          article.innerHTML = `
+          &lt;a href=&quot;${result.ref}&quot;&gt;&lt;h3 class=&quot;title&quot;&gt;${documents[result.ref].title}&lt;/h3&gt;&lt;/a&gt;
+          &lt;p&gt;&lt;a href=&quot;${result.ref}&quot;&gt;${documents[result.ref].title}&lt;/a&gt;&lt;/p&gt;
+          &lt;br&gt;
+          `
+          searchResults.appendChild(article)
+    })
+
+ // if results are empty
+ } else {
+    searchResults.innerHTML = '&lt;p&gt;No results found.&lt;/p&gt;'
+ }
+}
+
+function registerSearchHandler() {
+
+ // register on input event
+ searchInput.oninput = function(event) {
+
+    // remove search results if the user empties the search input field
+    if (searchInput.value == '') {
+                  
+          searchResults.innerHTML = ''
+    } else {
+                  
+          // get input value
+          var query = event.target.value
+
+          // run fuzzy search
+          var results = idx.search(query + '*')
+
+          // render results
+          renderSearchResults(results)
+    }
+ }
+
+ // set focus on search input and remove loading placeholder
+ searchInput.focus()
+ searchInput.placeholder = ''
+}
+
+window.onload = function() {
+
+ // get dom elements
+ searchInput = document.getElementById('search-input')
+ searchResults = document.getElementById('search-results')
+
+ // request and index documents
+ fetch('/posts/index.json', {
+    method: 'get'
+ }).then(
+    res =&gt; res.json()
+ ).then(
+    res =&gt; {
+
+          // index document
+          idx = lunr(function() {
+             this.ref('url')
+             this.field('title')
+             this.field('content')
+
+             res.forEach(function(doc) {
+                this.add(doc)
+                documents[doc.url] = {
+                      'title': doc.title,
+                      'content': doc.content,
+                }
+             }, this)
+          })
+
+          // data is loaded, next register handler
+          registerSearchHandler()
+    }
+ ).catch(
+    err =&gt; {
+          searchResults.innerHTML = `&lt;p&gt;${err}&lt;/p&gt;`
+    }
+ )
+}
+&lt;/script&gt;
+
+&lt;input id=&quot;search-input&quot; type=&quot;text&quot; placeholder=&quot;Loading...&quot; name=&quot;search&quot;&gt;
+
+&lt;section id=&quot;search-results&quot; class=&quot;search&quot;&gt;&lt;/section&gt; 
+    
+</code></pre></li><li><p>然后打开页面输入搜索框就可以搜多到内容</p></li></ol></li></ul><p><a id=toc_anchor name=#13.3-创建多语言支持></a></p><h3 id=1-3-3-创建多语言支持>1.3.3. 创建多语言支持</h3><ul><li><p>hugo支持多語言和多語言的生成</p><ol><li><p>配置默認語言和menu ：config.toml</p><pre><code> baseURL = &quot;http://example.org/&quot;
+ title = &quot;&quot;
+ theme = &quot;hyde&quot;
+ defaultContentLanguage = &quot;en&quot;
+
+ [params]
+ description = &quot;&quot;
+ homeMetaContent = &quot;clouda3 personal blog&quot;
+ footer = &quot;clouda3的个人网站&quot;
+ date = &quot;2019-04-10 14:05:50&quot;
+ codePenUser = &quot;someUser&quot;
+ [languages]
+ [language.en]
+    languageName = &quot;English&quot;
+    title = &quot;English&quot;
+
+ [[languages.en.menu.main]]
+    identifier = &quot;home&quot;
+    title = &quot;my home&quot;
+    name = &quot;Home&quot;
+    url = &quot;/&quot;
+    weight = 1
+
+ [[languages.en.menu.main]]
+
+    identifier = &quot;blog&quot;
+    title = &quot;my blog&quot;
+    name = &quot;Blog&quot;
+    url = &quot;/posts/&quot;
+    weight = 2
+
+ [language.cn]
+    languageName = &quot;cn&quot; 
+    title = &quot;中文&quot;
+
+ [[languages.cn.menu.main]]
+    identifier = &quot;home&quot;
+    title = &quot;主頁&quot;
+    name = &quot;Home&quot;
+    url = &quot;/cn&quot;
+    weight = 7
+
+    [[languages.cn.menu.main]]
+    identifier = &quot;blog&quot;
+    title = &quot;博客&quot;
+    name = &quot;博客&quot;
+    url = &quot;/cn/posts/&quot;
+    weight = 8
+</code></pre><ol><li><p>創建頁面post/first.cn.md first.en.md</p></li><li><p>創建可以切換中英文的按鈕,layouts/partials/lang.html</p><pre><code>&lt;nav class=&quot;LangNav&quot;&gt;
+
+{{ range $.Site.Home.AllTranslations }}
+      &lt;a href=&quot;{{ .Page.Permalink }}&quot;&gt;{{ .Language.Lang  }}&lt;/a&gt; 
+{{ end }}
+
+&lt;/nav&gt;
+</code></pre></li><li><p>修改layouts/partials/sidebar.html</p><pre><code>{{ partial &quot;lang.html&quot; . }}
+</code></pre></li><li><p>生成靜態html 目錄結構,cn是在一個目錄en是more的上一層目錄</p><pre><code>public
+---cn
+  ---post
+---post
+
+</code></pre></li><li><p>模板文字的多语言问题，创建i18n/en.toml cn.toml,在</p><pre><code>cn.toml
+[home_title]
+other = &quot;主頁&quot;
+</code></pre><pre><code>layouts/partial/related.html
+      
+{{ $related := .Site.RegularPages.RelatedIndices . &quot;tags&quot; | first 6 }}
+{{ with $related }}
+&lt;div class=&quot;related-content&quot;&gt;
+&lt;h2&gt;Related content&lt;/h2&gt;
+&lt;ul class=&quot;article-gallery&quot;&gt;
+   {{ range . }}
+   &lt;span&gt;&lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ .Title }}&lt;/a&gt; &lt;time class=&quot;pull-right post-list&quot; datetime=&quot;{{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }}&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;&lt;/span&gt;
+   {{ end }}
+&lt;/ul&gt;
+{{ else }}
+&lt;ul&gt;{{ i18n  &quot;nothing_related&quot;}}&lt;/ul&gt;
+&lt;/div&gt;
+{{ end }}
+    
+</code></pre></li></ol></li></ol></li></ul><p><a id=toc_anchor name=#13.4-语法高亮highlight></a></p><h3 id=1-3-4-语法高亮-highlight>1.3.4. 语法高亮 highlight</h3><pre><code><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#f92672>//</span> <span style=color:#f92672>...</span> <span style=color:#a6e22e>code</span></code></pre></td></tr></table></div></div></code></pre><p><a id=toc_anchor name=#13.5-显示相关内容></a></p><h3 id=1-3-5-显示相关内容>1.3.5. 显示相关内容</h3><ul><li><p>默认的相关内容是keywords相关</p><ol><li><p>创建layouts/partial/related.html</p><pre><code>{{ $related := .Site.RegularPages.Related . | first 6 }}
+{{ with $related }}
+&lt;div class=&quot;related-content&quot;&gt;
+&lt;h2&gt;Related content&lt;/h2&gt;
+&lt;ul class=&quot;article-gallery&quot;&gt;
+ {{ range . }}
+ &lt;span&gt;&lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ .Title }}&lt;/a&gt; &lt;time class=&quot;pull-right post-list&quot; datetime=&quot;{{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }}&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;&lt;/span&gt;
+ {{ end }}
+&lt;/ul&gt;
+{{ else }}
+&lt;ul&gt;. Nothing related&lt;/ul&gt;
+&lt;/div&gt;
+{{ end }}
+</code></pre></li><li><p>single.html</p><pre><code>    {{ define &quot;main&quot; -}}
+ &lt;div class=&quot;post&quot;&gt;
+ &lt;h1&gt;{{ .Title }}&lt;/h1&gt;
+ &lt;time datetime={{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }} class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+ {{ .Content }}
+ &lt;/div&gt;
+
+ {{ if .Site.DisqusShortname -}}
+ &lt;h2&gt;Comments&lt;/h2&gt;
+ {{ template &quot;_internal/disqus.html&quot; . }}
+ {{- end }}
+ {{ partial &quot;related.html&quot; . }}
+ {{- end }}
+</code></pre></li><li><p>新的post里面一定要包含keywords,默认对应keywords</p><pre><code> ---
+title: &quot;Second&quot;
+date: 2019-11-01T16:14:58+08:00
+draft: false
+keywords: [&quot;peter&quot;]
+---
+</code></pre></li><li><p>如果你的关键字name不是keywords比如是tags，那么需要调整related.html</p><pre><code>{{ $related := .Site.RegularPages.RelatedIndices . &quot;tags&quot; | first 6 }}
+{{ with $related }}
+&lt;div class=&quot;related-content&quot;&gt;
+ &lt;h2&gt;Related content&lt;/h2&gt;
+ &lt;ul class=&quot;article-gallery&quot;&gt;
+    {{ range . }}
+    &lt;span&gt;&lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ .Title }}&lt;/a&gt; &lt;time class=&quot;pull-right post-list&quot; datetime=&quot;{{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }}&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;&lt;/span&gt;
+    {{ end }}
+ &lt;/ul&gt;
+{{ else }}
+&lt;ul&gt;. Nothing related&lt;/ul&gt;
+&lt;/div&gt;
+{{ end }}
+</code></pre></li></ol></li></ul><p><a id=toc_anchor name=#13.6-显示当前页面所有的tag></a></p><h3 id=1-3-6-显示当前页面所有的tag>1.3.6. 显示当前页面所有的tag</h3><ol><li><p>创建layouts/partial/tags.html</p><pre><code>      {{ range .Params.tags }}
+        &lt;a href=&quot;/tags/{{ . }}&quot;&gt;
+         #{{ . }} 
+        &lt;/a&gt;
+    {{ end }}  
+</code></pre></li><li><p>把tags.html加入single.html</p><pre><code>     {{ define &quot;main&quot; -}}
+
+     &lt;div class=&quot;post&quot;&gt;
+     &lt;h1&gt;{{ .Title }}&lt;/h1&gt;
+         
+     &lt;time datetime={{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }} class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+     {{ partial &quot;tags.html&quot; . }}
+     {{ .Content }}
+     &lt;/div&gt;
+
+     {{ if .Site.DisqusShortname -}}
+     &lt;h2&gt;Comments&lt;/h2&gt;
+     {{ template &quot;_internal/disqus.html&quot; . }}
+     {{- end }}
+     {{ partial &quot;related.html&quot; . }}
+
+     {{- end }}
+
+</code></pre></li></ol><p><a id=toc_anchor name=#13.7-社交联系方式></a></p><h3 id=1-3-7-社交联系方式>1.3.7. 社交联系方式</h3><ul><li>网站大多会留下社交联系方式，比如fb，twitter,大部分网站是一排图标，这些图标都是svg格式的</li><li><p>sidebar.html</p><pre><code>        {{- with .Site.Params.social }}
+        &lt;div id=&quot;home-social&quot;&gt;
+            {{ partialCached &quot;social-icons.html&quot; . }}
+        &lt;/div&gt;
+    {{ end }}
+
+</code></pre><ol><li><p>social-icons.html</p><pre><code> {{ range . -}}
+ &lt;a href=&quot;{{ .url }}&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;{{ .name | humanize }}&quot;&gt;{{ partial &quot;svg.html&quot; . }}&lt;/a&gt;
+ {{- end -}}
+
+   
+</code></pre></li><li><p>config.toml</p><pre><code> [[params.social]]
+ name = &quot;twitter&quot;
+ url = &quot;https://twitter.com/xxx&quot;
+
+[[params.social]]
+ name = &quot;instagram&quot;
+ url = &quot;https://instagram.com/xxx&quot;
+
+[[params.social]]
+ name = &quot;github&quot;
+ url = &quot;https://github.com/xxx&quot;
+      
+[[params.social]]
+ name = &quot;email&quot;
+ url = &quot;https://marcusnunes.me/xxx&quot;
+
+[[params.social]]
+ name = &quot;linkedin&quot;
+ url = &quot;http://www.linkedin.com/in/xxx&quot;  
+[[params.social]]
+ name = &quot;weibo&quot;
+ url = &quot;http://www.weibo.com/xxx&quot; 
+     
+</code></pre></li><li><p>svg.html</p><pre><code>    {{- if (eq .name &quot;codepen&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-codepen&quot;&gt;&lt;polygon points=&quot;12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2&quot;&gt;&lt;/polygon&gt;&lt;line x1=&quot;12&quot; y1=&quot;22&quot; x2=&quot;12&quot; y2=&quot;15.5&quot;&gt;&lt;/line&gt;&lt;polyline points=&quot;22 8.5 12 15.5 2 8.5&quot;&gt;&lt;/polyline&gt;&lt;polyline points=&quot;2 15.5 12 8.5 22 15.5&quot;&gt;&lt;/polyline&gt;&lt;line x1=&quot;12&quot; y1=&quot;2&quot; x2=&quot;12&quot; y2=&quot;8.5&quot;&gt;&lt;/line&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;facebook&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-facebook&quot;&gt;&lt;path d=&quot;M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;github&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-github&quot;&gt;&lt;path d=&quot;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;gitlab&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-gitlab&quot;&gt;&lt;path d=&quot;M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;instagram&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-instagram&quot;&gt;&lt;rect x=&quot;2&quot; y=&quot;2&quot; width=&quot;20&quot; height=&quot;20&quot; rx=&quot;5&quot; ry=&quot;5&quot;&gt;&lt;/rect&gt;&lt;path d=&quot;M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z&quot;&gt;&lt;/path&gt;&lt;line x1=&quot;17.5&quot; y1=&quot;6.5&quot; x2=&quot;17.5&quot; y2=&quot;6.5&quot;&gt;&lt;/line&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;linkedin&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-linkedin&quot;&gt;&lt;path d=&quot;M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z&quot;&gt;&lt;/path&gt;&lt;rect x=&quot;2&quot; y=&quot;9&quot; width=&quot;4&quot; height=&quot;12&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;4&quot; cy=&quot;4&quot; r=&quot;2&quot;&gt;&lt;/circle&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;slack&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-slack&quot;&gt;&lt;path d=&quot;M22.08 9C19.81 1.41 16.54-.35 9 1.92S-.35 7.46 1.92 15 7.46 24.35 15 22.08 24.35 16.54 22.08 9z&quot;&gt;&lt;/path&gt;&lt;line x1=&quot;12.57&quot; y1=&quot;5.99&quot; x2=&quot;16.15&quot; y2=&quot;16.39&quot;&gt;&lt;/line&gt;&lt;line x1=&quot;7.85&quot; y1=&quot;7.61&quot; x2=&quot;11.43&quot; y2=&quot;18.01&quot;&gt;&lt;/line&gt;&lt;line x1=&quot;16.39&quot; y1=&quot;7.85&quot; x2=&quot;5.99&quot; y2=&quot;11.43&quot;&gt;&lt;/line&gt;&lt;line x1=&quot;18.01&quot; y1=&quot;12.57&quot; x2=&quot;7.61&quot; y2=&quot;16.15&quot;&gt;&lt;/line&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;telegram&quot;) -}}
+    &lt;svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; aria-hidden=&quot;true&quot; class=&quot;feather&quot;&gt;&lt;path d=&quot;m 22.05,1.577 c -0.393,-0.016 -0.784,0.08 -1.117,0.235 -0.484,0.186 -4.92,1.902 -9.41,3.64 C 9.263,6.325 7.005,7.198 5.267,7.867 3.53,8.537 2.222,9.035 2.153,9.059 c -0.46,0.16 -1.082,0.362 -1.61,0.984 -0.79581202,1.058365 0.21077405,1.964825 1.004,2.499 1.76,0.564 3.58,1.102 5.087,1.608 0.556,1.96 1.09,3.927 1.618,5.89 0.174,0.394 0.553,0.54 0.944,0.544 l -0.002,0.02 c 0,0 0.307,0.03 0.606,-0.042 0.3,-0.07 0.677,-0.244 1.02,-0.565 0.377,-0.354 1.4,-1.36 1.98,-1.928 l 4.37,3.226 0.035,0.02 c 0,0 0.484,0.34 1.192,0.388 0.354,0.024 0.82,-0.044 1.22,-0.337 0.403,-0.294 0.67,-0.767 0.795,-1.307 0.374,-1.63 2.853,-13.427 3.276,-15.38 L 23.676,4.725 C 23.972,3.625 23.863,2.617 23.18,2.02 22.838,1.723 22.444,1.593 22.05,1.576 Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;twitter&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-twitter&quot;&gt;&lt;path d=&quot;M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;youtube&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-youtube&quot;&gt;&lt;path d=&quot;M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z&quot;&gt;&lt;/path&gt;&lt;polygon points=&quot;9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02&quot;&gt;&lt;/polygon&gt;&lt;/svg&gt;
+    {{- else if (eq .name &quot;email&quot;) -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-mail&quot;&gt;&lt;path d=&quot;M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z&quot;&gt;&lt;/path&gt;&lt;polyline points=&quot;22,6 12,13 2,6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+    {{- else -}}
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;feather feather-link&quot;&gt;&lt;path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;&gt;&lt;/path&gt;&lt;path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    {{- end -}}
+
+</code></pre></li></ol></li></ul><p><a id=toc_anchor name=#13.8-社交分享></a></p><h3 id=1-3-8-社交分享>1.3.8. 社交分享</h3><ul><li><p>社交分享就是把这篇文章分享到社交网站上去,实际上很多网站表现出来的形式是一排社交网站的浮动按钮，这个浮动按钮不用自己做，有很多的第三方软件提供，比如国外addthis，国内又bshare</p></li><li><p>以addthis为例,注册addthis,选择社交网站比如wechat，fb，twitter，Qzone，申请完毕后得到一行代码</p><pre><code>
+     &lt;script type=&quot;text/javascript&quot; src=&quot;//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dc9230b5e0b9007&quot;&gt;&lt;/script&gt;
+
+</code></pre></li><li><p>把这行代码添加到模板layouts/_default/single.html</p><pre><code>     {{ define &quot;main&quot; -}}
+     &lt;div class=&quot;post&quot;&gt;
+     &lt;h1&gt;{{ .Title }}&lt;/h1&gt;
+     &lt;time datetime={{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }} class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+     {{ .Content }}
+     &lt;/div&gt;
+         
+     &lt;script type=&quot;text/javascript&quot; src=&quot;//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-xxxxxxxx&quot;&gt;&lt;/script&gt;
+
+</code></pre></li></ul><p><a id=toc_anchor name=#13.9-社交评论></a></p><h3 id=1-3-9-社交评论>1.3.9. 社交评论</h3><ol><li>社交评论就是利用个人的社交账号对目前所发的文章进行评论，这里也有很多第三方的公司提供组件，比如官方默认的Disqus</li><li>要先在Disqus注册然后 install on site -&gt; 要绑定好自己的域名</li><li><p>得到一段代码加入到自己的layouts/partials/disqus.html</p><pre><code>     &lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+     &lt;script&gt;
+
+     /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+     /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+     (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = 'https://www-gohugo-me.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+     })();
+     &lt;/script&gt;
+     &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;    
+     
+</code></pre></li><li><p>将layouts/partials/disqus.html加入到layouts/_defaults/single.html</p><pre><code>     {{ define &quot;main&quot; -}}
+     &lt;div class=&quot;post&quot;&gt;
+     &lt;h1&gt;{{ .Title }}&lt;/h1&gt;
+     &lt;time datetime={{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }} class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+     {{ .Content }}
+     &lt;/div&gt;
+         
+     &lt;script type=&quot;text/javascript&quot; src=&quot;//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dc9230b5e0b9007&quot;&gt;&lt;/script&gt;
+     {{ partial &quot;related.html&quot; . }}
+     {{ if .Site.DisqusShortname -}}
+
+     &lt;br/&gt;&lt;br/&gt;
+     &lt;h2&gt;##Comments&lt;/h2&gt;
+
+     {{ partial &quot;disqus.html&quot; . }}
+     {{- end }}
+     {{- end }}
+ 
+</code></pre><ol><li>config.toml 配置
+disqusShortname = &ldquo;disqus_xxxxx&rdquo;</li></ol></li></ol><p><a id=toc_anchor name=#13.10-gitalk评论></a></p><h3 id=1-3-10-gitalk-评论>1.3.10. gitalk 评论</h3><ul><li><p>Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件,巧妙的利用github issue的功能开发出来的插件，需要用户有github账户</p><ol><li>首先要用github账户创建一个仓库(repository)</li><li>在repository的setting里面开通issues功能</li><li><p>在github在用户的setting里面，developer settings 创建Oauth apps 创建app得到
+需要填写homepage url 和authorization callback URL *</p><pre><code>Client ID
+ 194e36d3bbcd14e7def9
+Client Secret
+ 2c99c40d21596f4dc7b9f31a76467ec19c72e653
+</code></pre></li><li><p>注册完毕后将下列代码加入layouts/partials/gitalk.html</p><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&quot;&gt;&lt;/script&gt; 
+
+&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;     
+&lt;script type=&quot;text/javascript&quot;&gt;
+ var gitalk = new Gitalk({
+ // gitalk的主要参数
+    clientID: `xxxx`,   //上面获取到的值
+    clientSecret: `xxxxx`,//上面获取到的值
+    repo: `clouda3`,  //您刚才建立仓库的名字
+    owner: 'clouda3',   //你的GitHub用户名字
+    admin: ['clouda3'],  //你的GitHub用户的名字
+    id: 'indow.location.pathname', //id不能重复，如果重复就会把其他页面的评论引进来
+    });
+    gitalk.render('gitalk-container');
+&lt;/script&gt; 
+</code></pre></li><li><p>把gitalk.html 加入single.html</p><pre><code>	{{ partial &quot;gitalk&quot; . }}
+</code></pre></li></ol></li></ul></div><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/posts/hugo-medium-level-lesson/>手把手使用Hugo搭建网站-中级篇</a></li><li><a href=/posts/hugo-entry-level-lesson/>手把手使用Hugo搭建网站-初级篇</a></li></ul></div><div class="post-meta meta-tags"><ul class=clearfix><li><a href=https://clouda3.github.io/tags/hugo>hugo</a></li><li><a href=https://clouda3.github.io/tags/themes>themes</a></li></ul></div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/yyyyyyyy/ title=Yyyyyyyy>Yyyyyyyy</a></li><li><a href=https://clouda3.github.io/posts/zzzzzzzzzzzzzz/ title=Zzzzzzzzzzzzzz>Zzzzzzzzzzzzzz</a></li><li><a href=https://clouda3.github.io/posts/hugo-advanced-level-lesson/ title=手把手使用Hugo搭建网站-高级篇>手把手使用Hugo搭建网站-高级篇</a></li><li><a href=https://clouda3.github.io/posts/hugo-medium-level-lesson/ title=手把手使用Hugo搭建网站-中级篇>手把手使用Hugo搭建网站-中级篇</a></li><li><a href=https://clouda3.github.io/posts/hugo-entry-level-lesson/ title=手把手使用Hugo搭建网站-初级篇>手把手使用Hugo搭建网站-初级篇</a></li><li><a href=https://clouda3.github.io/posts/aws-saa-pass/ title=SAA-CO1考试之路>SAA-CO1考试之路</a></li><li><a href=https://clouda3.github.io/posts/aws-sap-passed/ title="aws sap passed">aws sap passed</a></li><li><a href=https://clouda3.github.io/posts/aws-x-ray/ title="aws x-ray">aws x-ray</a></li><li><a href=https://clouda3.github.io/posts/aws-migration/ title="accelerating aws migration">accelerating aws migration</a></li><li><a href=https://clouda3.github.io/posts/aws-glue-athena-quicksight/ title="aws online analytical processing (or OLAP)">aws online analytical processing (or OLAP)</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/aws/>aws (1)</a></li><li><a href=https://clouda3.github.io/categories/hugo/>hugo (3)</a></li><li><a href=https://clouda3.github.io/categories/saa/>saa (1)</a></li><li><a href=https://clouda3.github.io/categories/sap/>sap (16)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2019 <a href=https://clouda3.github.io/>三朵云的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>

@@ -1,0 +1,298 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>手把手使用Hugo搭建网站-中级篇 | 三朵云的blog</title><meta property="og:title" content="手把手使用Hugo搭建网站-中级篇 - 三朵云的blog"><meta property="og:type" content="article"><meta property="article:published_time" content="2019-11-26T11:40:37&#43;08:00"><meta property="article:modified_time" content="2019-11-26T11:40:37&#43;08:00"><meta name=Keywords content><meta name=description content="Hogo sample websites and themes"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/hugo-medium-level-lesson/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>三朵云的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#1-2-手把手使用hugo搭建网站进阶篇>1.2. 手把手使用hugo搭建网站进阶篇</a><ul><li><a href=#1-2-1-自定义菜单>1.2.1. 自定义菜单</a></li><li><a href=#1-2-2-自定义tag-category-keyword>1.2.2. 自定义tag/category/keyword</a></li><li><a href=#1-2-3-创建header-和footer>1.2.3. 创建header 和footer</a></li><li><a href=#1-2-4-自定义边栏>1.2.4. 自定义边栏</a></li><li><a href=#1-2-5-列举最新的文章>1.2.5. 列举最新的文章</a></li><li><a href=#1-2-6-创建列表和对应的模板>1.2.6. 创建列表和对应的模板</a></li><li><a href=#1-2-7-列表创建摘要>1.2.7. 列表创建摘要</a></li><li><a href=#1-2-8-分頁>1.2.8. 分頁</a></li><li><a href=#1-2-9-创建统计>1.2.9. 创建统计</a></li><li><a href=#1-2-10-创建rss>1.2.10. 创建rss</a></li></ul></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
+let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
+function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
+window.onscroll=function(){ishide();if((document.documentElement.scrollTop!=0)&&(floatTocDivElem.style.display=='block')){top();}};window.onresize=function(){ishide();}
+document.getElementById("toc_btn_open").addEventListener('click',function(){switch(tocListElem.style.display){case "none":document.getElementById("toc_btn_close").style.display="";tocListElem.style.display="";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="1px solid gray";break;default:break;}},false);document.getElementById("toc_btn_close").addEventListener('click',function(){switch(tocListElem.style.display){case "":document.getElementById("toc_btn_close").style.display="none";tocListElem.style.display="none";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="";break;default:break;}},false);}else{let fixedTocElem=document.getElementsByClassName("toc-article")[0];fixedTocElem.appendChild(tocNavElem);fixedTocElem.parentElement.style.display="";}
+document.getElementById("virtual_toc_list").remove();};</script><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>手把手使用Hugo搭建网站-中级篇</h1></header><date class="post-meta meta-date">2019年11月26日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/hugo>hugo</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><p><a id=toc_anchor name=#12-手把手使用hugo搭建网站进阶篇></a></p><h2 id=1-2-手把手使用hugo搭建网站进阶篇>1.2. 手把手使用hugo搭建网站进阶篇</h2><p><a id=toc_anchor name=#12.1-自定义菜单></a></p><h3 id=1-2-1-自定义菜单>1.2.1. 自定义菜单</h3><ul><li><p>配置定义菜单栏</p><ol><li><p>layouts/partials/sidebar.html</p><pre><code>&lt;aside class=&quot;sidebar&quot;&gt;
+&lt;div class=&quot;container sidebar-sticky&quot;&gt;
+ &lt;div class=&quot;sidebar-about&quot;&gt;
+    &lt;a href=&quot;{{ .Site.BaseURL }}&quot;&gt;&lt;h1&gt;{{ .Site.Title }}&lt;/h1&gt;&lt;/a&gt;
+    &lt;p class=&quot;lead&quot;&gt;
+    {{ with .Site.Params.description }} {{.}} {{ else }}{{end}}
+    &lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;nav&gt;
+         
+    &lt;ul class=&quot;sidebar-nav&quot;&gt;
+    {{ $currentPage := . }}
+       {{ range .Site.Menus.main -}}
+       &lt;li&gt;   &lt;a class=&quot;sidebar-nav-item{{if or ($currentPage.IsMenuCurrent &quot;main&quot; .) ($currentPage.HasMenuCurrent &quot;main&quot; .) }} active{{end}}&quot; href=&quot;{{ .URL }}&quot; title=&quot;{{ .Title }}&quot;&gt;{{ .Name }}&lt;/a&gt;
+&lt;/li&gt;
+    {{- end }}
+            
+    &lt;/ul&gt;
+ &lt;ul class=&quot;sidebar-nav&quot;&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/ul&gt;
+ &lt;/nav&gt;
+
+ &lt;p&gt;{{ with .Site.Params.copyright }}{{.}}{{ else }}&amp;copy;  xxx 公司 {{ now.Format &quot;2006&quot;}}.  All rights reserved. {{end}} &lt;/p&gt;
+&lt;/div&gt;
+&lt;/aside&gt;
+</code></pre></li><li><p>site/config.toml</p><pre><code>baseURL = &quot;http://clouda3.github.io/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;Clouda3&quot;
+theme = &quot;hyde&quot;
+enableRobotsTXT=&quot;true&quot;
+[permalinks]
+post = &quot;/:filename/&quot;
+
+[imaging]
+quality = 99
+
+[params]
+description = &quot;&quot;
+homeMetaContent = &quot;clouda3 personal blog&quot;
+footer = &quot;clouda3的个人网站&quot;
+date = &quot;2019-04-10 14:05:50&quot;
+codePenUser = &quot;someUser&quot;
+katex = true
+      
+
+[menu]
+[[menu.main]]
+ identifier = &quot;home&quot;
+ name = &quot;home&quot;
+ url = &quot;/&quot;
+ weight = 1
+[[menu.main]]
+ identifier = &quot;blog&quot;
+ name = &quot;Blog&quot;
+ url = &quot;/posts/&quot;
+ weight = 2
+[[menu.main]]
+ identifier = &quot;tags&quot;
+ name = &quot;Tags&quot;
+ url = &quot;/tags/&quot;
+ weight = 3
+[[menu.main]]
+ identifier = &quot;about&quot;
+ name = &quot;About&quot;
+ url = &quot;/about&quot;
+ weight = 4
+[[menu.main]]
+ identifier = &quot;rss&quot;
+ name = &quot;RSS&quot;
+ url = &quot;/index.xml&quot;
+ weight = 5	
+</code></pre></li></ol></li><li><p>内容页面关联菜单</p><ol><li>content/posts 目录下面添加文章</li><li>hugo new post post/abc.md
+<a id=toc_anchor name=#12.2-自定义tag/category/keyword></a></li></ol></li></ul><h3 id=1-2-2-自定义tag-category-keyword>1.2.2. 自定义tag/category/keyword</h3><ul><li><p>无论是tag,category 还是keyword 都是用来分类的，在hugo里面没有太多的区别，都可以自定义,先演示页面keywords</p><ol><li><p>自定义页面的keywords,xxx.md</p><pre><code>---
+title: &quot;First&quot;
+date: 2019-11-01T16:08:13+08:00
+draft: false
+tags: [&quot;aws&quot;]
+keywords: [&quot;aws&quot;,&quot;first&quot;]
+---
+
+</code></pre></li><li><p>layouts/partials/head.html</p><pre><code>{{ with .Params.keywords }}&lt;meta name=&quot;keywords&quot; content=&quot;{{ range $i, $e := . }}{{ if $i }} {{ end }}{{ $e }}{{ end }}&quot;&gt;{{ end }}
+</code></pre></li></ol></li><li><p>tag和categories</p><ol><li><p>xxx.md</p><pre><code>---
+title: &quot;First&quot;
+date: 2019-11-01T16:08:13+08:00
+draft: false
+categories: [&quot;亚马逊云&quot;,&quot;认证考试&quot;]
+tags: [&quot;aws&quot;]
+keywords: [&quot;aws&quot;,&quot;first&quot;]
+---
+
+</code></pre></li><li><p>显示所有的tag,定义模板layouts/tags/index.html</p><pre><code>{{ define &quot;main&quot; -}}
+&lt;ul&gt;
+ {{ $type := .Type }}
+ {{$type}}
+ {{ range $key, $value := .Site.Taxonomies.tags.Alphabetical }}
+    {{ $name := .Name }}
+    {{ $count := .Count }}
+    {{ with $.Site.GetPage (printf &quot;/%s/%s&quot; $type $name) }}
+          &lt;li&gt;&lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ $name }}&lt;/a&gt; {{ $count }}11111111&lt;/li&gt;
+    {{ end }}
+ {{ end }}
+&lt;/ul&gt;
+
+{{- end }}
+</code></pre></li><li><p>创建tag显示页面tags/index.md</p><pre><code> ---
+title: &quot;Posts&quot;
+date: 2019-11-01T16:10:12+08:00
+type: &quot;tags&quot;
+layout: &quot;index&quot;
+---
+</code></pre></li><li><p>显示每个tag关联的页面,创建模板layouts/taxonomy/tag.html</p><pre><code>{{ define &quot;main&quot; -}}
+&lt;ul&gt;
+{{ range .Data.Pages }}
+ &lt;li&gt;
+    &lt;a href=&quot;{{.RelPermalink}}&quot;&gt;{{ .Title }}&lt;/a&gt;
+ &lt;/li&gt;
+{{ end }}
+&lt;/ul&gt;
+{{- end }}
+</code></pre></li><li><p>访问<a href=http://xxx/tags/>http://xxx/tags/</a>
+<a id=toc_anchor name=#12.3-创建header和footer></a></p></li></ol></li></ul><h3 id=1-2-3-创建header-和footer>1.2.3. 创建header 和footer</h3><ul><li>创建header 和 footer 相关模板
+<a id=toc_anchor name=#12.4-自定义边栏></a></li></ul><h3 id=1-2-4-自定义边栏>1.2.4. 自定义边栏</h3><ul><li>创建sidebar 模板
+<a id=toc_anchor name=#12.5-列举最新的文章></a></li></ul><h3 id=1-2-5-列举最新的文章>1.2.5. 列举最新的文章</h3><ul><li>例举最新或者关联的文章</li><li><p>創建theme/layout/partial/related.html 模板</p><pre><code>{{ $related := .Site.RegularPages.Related . | first 5 }}
+{{ with $related }}
+&lt;h4&gt;相關頁面&lt;/h4&gt;
+&lt;ul&gt;
+	{{ range . }}
+	&lt;li&gt;&lt;a href=&quot;{{ .RelPermalink }}&quot;&gt;{{ .Title }}&lt;/a&gt;&lt;/li&gt;
+	{{ end }}
+&lt;/ul&gt;
+{{ end }}
+</code></pre></li><li><p>在layout/_default/single.html模板中加入related.html模板的引用</p><pre><code><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 0</span>{{ <span style=color:#a6e22e>define</span> <span style=color:#e6db74>&#34;main&#34;</span> <span style=color:#f92672>-</span>}}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>&lt;<span style=color:#a6e22e>div</span> <span style=color:#a6e22e>class</span>=<span style=color:#e6db74>&#34;post&#34;</span>&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  &lt;<span style=color:#a6e22e>h1</span>&gt;{{ .<span style=color:#a6e22e>Title</span> }}&lt;<span style=color:#f92672>/</span><span style=color:#a6e22e>h1</span>&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  &lt;<span style=color:#a6e22e>time</span> <span style=color:#a6e22e>datetime</span>={{ .<span style=color:#a6e22e>Date</span>.<span style=color:#a6e22e>Format</span> <span style=color:#e6db74>&#34;2006-01-02T15:04:05Z0700&#34;</span> }} <span style=color:#a6e22e>class</span>=<span style=color:#e6db74>&#34;post-date&#34;</span>&gt;{{ .<span style=color:#a6e22e>Date</span>.<span style=color:#a6e22e>Format</span> <span style=color:#e6db74>&#34;Mon, Jan 2, 2006&#34;</span> }}&lt;<span style=color:#f92672>/</span><span style=color:#a6e22e>time</span>&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  {{ .<span style=color:#a6e22e>Content</span> }}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>&lt;<span style=color:#f92672>/</span><span style=color:#a6e22e>div</span>&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>{{ <span style=color:#66d9ef>if</span> .<span style=color:#a6e22e>Site</span>.<span style=color:#a6e22e>DisqusShortname</span> <span style=color:#f92672>-</span>}}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>&lt;<span style=color:#a6e22e>h2</span>&gt;<span style=color:#a6e22e>Comments</span>&lt;<span style=color:#f92672>/</span><span style=color:#a6e22e>h2</span>&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>{{ <span style=color:#a6e22e>template</span> <span style=color:#e6db74>&#34;_internal/disqus.html&#34;</span> . }}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>{{<span style=color:#f92672>-</span> <span style=color:#a6e22e>end</span> }}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
+<span style=display:block;width:100%;background-color:#3c3d38><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>{{ <span style=color:#a6e22e>partial</span> <span style=color:#e6db74>&#34;related.html&#34;</span> . }}
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>{{<span style=color:#f92672>-</span> <span style=color:#a6e22e>end</span> }}</code></pre></div></code></pre></li><li><p>這個會讓keyword關聯的頁面顯示出來，但是時間有先後的，晚發的文章裡面有老的文章的連接，老的文章没有新的文章的链接</p></li></ul><p><a id=toc_anchor name=#12.6-创建列表和对应的模板></a></p><h3 id=1-2-6-创建列表和对应的模板>1.2.6. 创建列表和对应的模板</h3><ul><li>posts/_index.md 和 posts/index.md的区别<ol><li>_index.md默认是列表页面（branch bundle）对应的layout是 list.html,index.md（leaf bundle）对应的layout是 single.html</li></ol></li><li>默认对应模板就是layouts/_default/list.html 和layouts/_default/single.html</li><li>如果自定义模板可以{theme}/layouts/posts/list.html {theme}/layouts/posts/single.html</li><li>也可以直接在layouts/posts/list.html 和/layouts/posts/single.html 网站的模板优先级别高于主题模板</li></ul><p><a id=toc_anchor name=#12.7-列表创建摘要></a></p><h3 id=1-2-7-列表创建摘要>1.2.7. 列表创建摘要</h3><pre><code>   {{ define &quot;main&quot; -}}
+      &lt;div class=&quot;posts&quot;&gt;
+      {{ range .Site.RegularPages -}}
+      &lt;article class=&quot;post&quot;&gt;
+      &lt;h1 class=&quot;post-title&quot;&gt;
+         &lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ .Title }}&lt;/a&gt;
+      &lt;/h1&gt;
+      &lt;time datetime=&quot;{{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }}&quot; class=&quot;post-date&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;
+      {{ .Summary }}
+      {{ if .Truncated }}
+      &lt;div class=&quot;read-more-link&quot;&gt;
+         &lt;a href=&quot;{{ .RelPermalink }}&quot;&gt;Read More…&lt;/a&gt;
+      &lt;/div&gt;
+      {{ end }}
+      &lt;/article&gt;
+      {{- end }}
+      &lt;/div&gt;
+      {{- end }}
+</code></pre><p><a id=toc_anchor name=#12.8-分頁></a></p><h3 id=1-2-8-分頁>1.2.8. 分頁</h3><ol><li>默認使用_internal/pagination.html</li><li><p>可以自定分頁模板 layouts/partials/pagination.html</p><pre><code>      
+  {{ $paginator := .Paginate (where .Pages &quot;Type&quot; &quot;posts&quot;) }}
+  &lt;ul&gt;
+  {{ range $paginator.Pages }}
+     &lt;li&gt;
+     &lt;span&gt;&lt;a href=&quot;{{ .Permalink }}&quot;&gt;{{ .Title }}&lt;/a&gt; &lt;time class=&quot;pull-right post-list&quot; datetime=&quot;{{ .Date.Format &quot;2006-01-02T15:04:05Z0700&quot; }}&quot;&gt;{{ .Date.Format &quot;Mon, Jan 2, 2006&quot; }}&lt;/time&gt;&lt;/span&gt;
+  &lt;/li&gt;
+  {{- end }}
+
+  &lt;/ul&gt;
+
+  {{ $pag := $.Paginator }}
+  {{ if gt $pag.TotalPages 1 }}
+  &lt;ul class=&quot;pagination&quot;&gt;
+     {{ with $pag.First }}
+     &lt;li class=&quot;page-item&quot;&gt;
+        &lt;a href=&quot;{{ .URL }}&quot; class=&quot;page-link&quot; aria-label=&quot;First&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;laquo;&amp;laquo;&lt;/span&gt;&lt;/a&gt;
+     &lt;/li&gt;
+     {{ end }}
+     &lt;li class=&quot;page-item{{ if not $pag.HasPrev }} disabled{{ end }}&quot;&gt;
+     &lt;a {{ if $pag.HasPrev }}href=&quot;{{ $pag.Prev.URL }}&quot;{{ end }} class=&quot;page-link&quot; aria-label=&quot;Previous&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;laquo;&lt;/span&gt;&lt;/a&gt;
+     &lt;/li&gt;
+     {{ $ellipsed := false }}
+     {{ $shouldEllipse := false }}
+     {{ range $pag.Pagers }}
+     {{ $right := sub .TotalPages .PageNumber }}
+     {{ $showNumber := or (le .PageNumber 3) (eq $right 0) }}
+     {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2)))  }}
+     {{ if $showNumber }}
+        {{ $ellipsed = false }}
+        {{ $shouldEllipse = false }}
+     {{ else }}
+        {{ $shouldEllipse = not $ellipsed }}
+        {{ $ellipsed = true }}
+     {{ end }}
+     {{ if $showNumber }}
+     &lt;li class=&quot;page-item{{ if eq . $pag }} active{{ end }}&quot;&gt;&lt;a class=&quot;page-link&quot; href=&quot;{{ .URL }}&quot;&gt;{{ .PageNumber }}&lt;/a&gt;&lt;/li&gt;
+     {{ else if $shouldEllipse }}
+     &lt;li class=&quot;page-item disabled&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;nbsp;&amp;hellip;&amp;nbsp;&lt;/span&gt;&lt;/li&gt;
+     {{ end }}
+     {{ end }}
+     &lt;li class=&quot;page-item{{ if not $pag.HasNext }} disabled{{ end }}&quot;&gt;
+     &lt;a {{ if $pag.HasNext }}href=&quot;{{ $pag.Next.URL }}&quot;{{ end }} class=&quot;page-link&quot; aria-label=&quot;Next&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;raquo;&lt;/span&gt;&lt;/a&gt;
+     &lt;/li&gt;
+     {{ with $pag.Last }}
+     &lt;li class=&quot;page-item&quot;&gt;
+        &lt;a href=&quot;{{ .URL }}&quot; class=&quot;page-link&quot; aria-label=&quot;Last&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;raquo;&amp;raquo;&lt;/span&gt;&lt;/a&gt;
+     &lt;/li&gt;
+     {{ end }}
+  &lt;/ul&gt;
+  {{ end }}  
+</code></pre><ol><li><p>layouts/_default/list.html</p><pre><code>{{ define &quot;main&quot; -}}
+
+{{ partial &quot;pagination.html&quot; .  }}
+
+{{- end }}
+   
+</code></pre></li><li><p>這樣還是有些問題，按鈕豎排，改一下樣式表 static/css/hyde.css</p><pre><code>/** vvv Add lines below */
+ul.pagination {
+ list-style-type: none;
+}
+
+ul.pagination &gt; li {
+ display: inline;
+}
+  
+</code></pre></li></ol></li></ol><p><a id=toc_anchor name=#12.9-创建统计></a></p><h3 id=1-2-9-创建统计>1.2.9. 创建统计</h3><ol><li>无论是baidu还是google还是chinaz都有相关的统计代码，只需要把这一段代码加入到我们的页面就可以了，以google来举例</li><li><p>申请google的analytics，会得到一段代码,把这段代码加入到layouts/partials/analytics.html</p><pre><code>  &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
+  &lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-xxxx&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-152981067-1');
+  &lt;/script&gt;
+ 
+</code></pre></li><li><p>把analytics.html 加入到layouts/_default/baseof.html</p><pre><code>  {{ partial &quot;head.html&quot; . }}
+  &lt;body class=&quot;{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}&quot;&gt;
+  {{ partial &quot;sidebar.html&quot; . }}
+     &lt;main class=&quot;content container&quot;&gt;
+     {{ block &quot;main&quot; . -}}{{- end }}
+     &lt;/main&gt;
+
+     {{ partial &quot;google-analytics.html&quot; . }}
+  &lt;/body&gt;
+  &lt;/html&gt;
+
+</code></pre><ol><li>访问网站，到google analytics后台就可以看到访问次数和其他的信息了
+<a id=toc_anchor name=#12.10-创建rss></a></li></ol></li></ol><h3 id=1-2-10-创建rss>1.2.10. 创建rss</h3><ul><li>什么是rss就是创建一个网站信息的xml文件，别人通过这个xml文件可以把你网站上的信息聚合到别的地方</li><li>比如你用google rss可以聚合你喜欢的各个体育网站，而不用挨个打开这些网站，让这些网站的信息统一显示在一个页面上.</li><li><p>默认hogo使用用内部rss:layouts/_internal/_default/rss.xml</p><pre><code>  {{ printf &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;utf-8\&quot; standalone=\&quot;yes\&quot; ?&gt;&quot; | safeHTML }}
+  &lt;rss version=&quot;2.0&quot; xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;&gt;
+  &lt;channel&gt;
+     &lt;title&gt;{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}&lt;/title&gt;
+     &lt;link&gt;{{ .Permalink }}&lt;/link&gt;
+     &lt;description&gt;Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}&lt;/description&gt;
+     &lt;generator&gt;Hugo -- gohugo.io&lt;/generator&gt;{{ with .Site.LanguageCode }}
+     &lt;language&gt;{{.}}&lt;/language&gt;{{end}}{{ with .Site.Author.email }}
+     &lt;managingEditor&gt;{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}&lt;/managingEditor&gt;{{end}}{{ with .Site.Author.email }}
+     &lt;webMaster&gt;{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}&lt;/webMaster&gt;{{end}}{{ with .Site.Copyright }}
+     &lt;copyright&gt;{{.}}&lt;/copyright&gt;{{end}}{{ if not .Date.IsZero }}
+     &lt;lastBuildDate&gt;{{ .Date.Format &quot;Mon, 02 Jan 2006 15:04:05 -0700&quot; | safeHTML }}&lt;/lastBuildDate&gt;{{ end }}
+     {{ with .OutputFormats.Get &quot;RSS&quot; }}
+        {{ printf &quot;&lt;atom:link href=%q rel=\&quot;self\&quot; type=%q /&gt;&quot; .Permalink .MediaType | safeHTML }}
+     {{ end }}
+     {{ range .Pages }}
+     &lt;item&gt;
+        &lt;title&gt;{{ .Title }}&lt;/title&gt;
+        &lt;link&gt;{{ .Permalink }}&lt;/link&gt;
+        &lt;pubDate&gt;{{ .Date.Format &quot;Mon, 02 Jan 2006 15:04:05 -0700&quot; | safeHTML }}&lt;/pubDate&gt;
+        {{ with .Site.Author.email }}&lt;author&gt;{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}&lt;/author&gt;{{end}}
+        &lt;guid&gt;{{ .Permalink }}&lt;/guid&gt;
+        &lt;description&gt;{{ .Summary | html }}&lt;/description&gt;
+     &lt;/item&gt;
+     {{ end }}
+  &lt;/channel&gt;
+  &lt;/rss&gt;
+
+</code></pre></li></ul></div><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/posts/hugo-entry-level-lesson/>手把手使用Hugo搭建网站-初级篇</a></li></ul></div><div class="post-meta meta-tags"><ul class=clearfix><li><a href=https://clouda3.github.io/tags/hugo>hugo</a></li><li><a href=https://clouda3.github.io/tags/themes>themes</a></li></ul></div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/yyyyyyyy/ title=Yyyyyyyy>Yyyyyyyy</a></li><li><a href=https://clouda3.github.io/posts/zzzzzzzzzzzzzz/ title=Zzzzzzzzzzzzzz>Zzzzzzzzzzzzzz</a></li><li><a href=https://clouda3.github.io/posts/hugo-advanced-level-lesson/ title=手把手使用Hugo搭建网站-高级篇>手把手使用Hugo搭建网站-高级篇</a></li><li><a href=https://clouda3.github.io/posts/hugo-medium-level-lesson/ title=手把手使用Hugo搭建网站-中级篇>手把手使用Hugo搭建网站-中级篇</a></li><li><a href=https://clouda3.github.io/posts/hugo-entry-level-lesson/ title=手把手使用Hugo搭建网站-初级篇>手把手使用Hugo搭建网站-初级篇</a></li><li><a href=https://clouda3.github.io/posts/aws-saa-pass/ title=SAA-CO1考试之路>SAA-CO1考试之路</a></li><li><a href=https://clouda3.github.io/posts/aws-sap-passed/ title="aws sap passed">aws sap passed</a></li><li><a href=https://clouda3.github.io/posts/aws-x-ray/ title="aws x-ray">aws x-ray</a></li><li><a href=https://clouda3.github.io/posts/aws-migration/ title="accelerating aws migration">accelerating aws migration</a></li><li><a href=https://clouda3.github.io/posts/aws-glue-athena-quicksight/ title="aws online analytical processing (or OLAP)">aws online analytical processing (or OLAP)</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/aws/>aws (1)</a></li><li><a href=https://clouda3.github.io/categories/hugo/>hugo (3)</a></li><li><a href=https://clouda3.github.io/categories/saa/>saa (1)</a></li><li><a href=https://clouda3.github.io/categories/sap/>sap (16)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2019 <a href=https://clouda3.github.io/>三朵云的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>
