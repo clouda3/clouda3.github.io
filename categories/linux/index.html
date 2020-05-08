@@ -4,7 +4,7 @@
 <a href=https://clouda3.github.io/about title=About>About</a>
 <a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><h3 class=archive-title>分类
 <span class=keyword>Linux</span>
-中的文章</h3><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/linux-file-max-open/>linux最大文件打开数</a></h1></header><date class="post-meta meta-date">2020年5月6日</date><div class="post-meta meta-category">|
+中的文章</h3><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/linux-file-max-open/>linux最大文件打开数</a></h1></header><date class="post-meta meta-date">2020年5月7日</date><div class="post-meta meta-category">|
 <a href=https://clouda3.github.io/categories/linux>Linux</a></div><div class=post-content>文件最大打开数 如果服务器提供TCP服务（TCP层或者HTTP层），在并发访问量持续很高时，容易产生too many open files错误。这时查看netstat可以发现很多TIME_WAIT状态的链接，这说明大量链接处于半开状态，已经完成了请求响应，然后进行下一步操作，如果句柄数(文件打开数)超过了阈值，那就只能等待或者出错 解决方案 系统内核的修改
 cat /proc/sys/fs/file-max sysctl -a sysctl -p 每个用户级别的修改
 ulimit -n 1024000 (临时修改) vim /etc/security/limits.conf * soft nofile 2048 * hard nofile 2048 如果阿里云或者aws云里面的centos都是被优化过的，默认的1024都被修改成了65536了，所以对于大部分人来说足够用了
