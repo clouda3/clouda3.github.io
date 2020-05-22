@@ -3,6 +3,6 @@
 ssh-keygen ssh-copy-id ansible@node ip 使用ad-hoc 在客户执行命令，相当于命令行 /etc/ansible/hosts,最好谨慎使用hosts配置，安全问题需要解决
 [docker] 192.168.25.173 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=&amp;quot;xxx&amp;quot; 执行以下ping,命令里面的docker对应的上面文件的docker
 ansible docker -m ping 使用ad-hoc命令管理软件包,安装
-ansible docker -m yum yum -a &amp;quot;name=docker state=present&amp;quot; -b 使用ad-hoc命令管理软件包,设置默认启动
+ansible docker -m yum -a &amp;quot;name=docker state=present&amp;quot; -b 使用ad-hoc命令管理软件包,设置默认启动
 ansible docker -b -m service -a &amp;quot;name=docker enabled=yes&amp;quot; 使用ad-hoc命令管理软件包,启动
-ansible web -b -m service -a &amp;quot;name=httpd state=started&amp;quot; 使用ansible-playbook 部署docker test-ansile.</description></item></channel></rss>
+ansible docker -b -m service -a &amp;quot;name=httpd state=started&amp;quot; 使用ansible-playbook 部署docker test-ansile.</description></item></channel></rss>

@@ -11,9 +11,9 @@
 ssh-keygen ssh-copy-id ansible@node ip 使用ad-hoc 在客户执行命令，相当于命令行 /etc/ansible/hosts,最好谨慎使用hosts配置，安全问题需要解决
 [docker] 192.168.25.173 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=&quot;xxx&quot; 执行以下ping,命令里面的docker对应的上面文件的docker
 ansible docker -m ping 使用ad-hoc命令管理软件包,安装
-ansible docker -m yum yum -a &quot;name=docker state=present&quot; -b 使用ad-hoc命令管理软件包,设置默认启动
+ansible docker -m yum -a &quot;name=docker state=present&quot; -b 使用ad-hoc命令管理软件包,设置默认启动
 ansible docker -b -m service -a &quot;name=docker enabled=yes&quot; 使用ad-hoc命令管理软件包,启动
-ansible web -b -m service -a &quot;name=httpd state=started&quot; 使用ansible-playbook 部署docker test-ansile.……<p class=readmore><a href=https://clouda3.github.io/posts/ansible-deploy-docker-container/>阅读全文</a></p></div></article><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/k8s-install-ingress/>k8s使用ingress总结</a></h1></header><date class="post-meta meta-date">2020年5月3日</date><div class="post-meta meta-category">|
+ansible docker -b -m service -a &quot;name=httpd state=started&quot; 使用ansible-playbook 部署docker test-ansile.……<p class=readmore><a href=https://clouda3.github.io/posts/ansible-deploy-docker-container/>阅读全文</a></p></div></article><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/k8s-install-ingress/>k8s使用ingress总结</a></h1></header><date class="post-meta meta-date">2020年5月3日</date><div class="post-meta meta-category">|
 <a href=https://clouda3.github.io/categories/kubernets>kubernets</a>
 <a href=https://clouda3.github.io/categories/docker>docker</a></div><div class=post-content>安装准备 Centos7.7 vm 或者真实的物理机三台(master一台,node两台) 硬件要求2GB ram,最低2CPU，最少32GB 硬盘 节点之间最好网络互通，如果不考虑安全可以关闭firewalld 可以访问到外部网络,因为需要网络资源，比如yum源和其他k8s需要的yaml文件 需要安装和配置 yum源配置 防火墙selinux的关闭与配置 swap分区配置 桥接ipv4流量交给iptables 文件句柄数的限制 Docker的安装 Kubeadmin,flannel 创建deployment,service,pod,ingress,ingress controller,kubernets-dashboard 具体安装步骤 VM 网络选择bridge模式 master:192.168.25.200 node:192.168.25.187&frasl;192.168.25.188
 防火墙

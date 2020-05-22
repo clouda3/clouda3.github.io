@@ -19,11 +19,11 @@ ssh-copy-id ansible@node ip
 
 </code></pre></li><li><p>执行以下ping,命令里面的docker对应的上面文件的docker</p><pre><code>ansible docker -m ping
 
-</code></pre></li><li><p>使用ad-hoc命令管理软件包,安装</p><pre><code>ansible docker -m yum yum -a &quot;name=docker state=present&quot; -b
+</code></pre></li><li><p>使用ad-hoc命令管理软件包,安装</p><pre><code>ansible docker -m yum -a &quot;name=docker state=present&quot; -b
 
 </code></pre></li><li><p>使用ad-hoc命令管理软件包,设置默认启动</p><pre><code>ansible docker -b -m service -a &quot;name=docker  enabled=yes&quot;
 
-</code></pre></li><li><p>使用ad-hoc命令管理软件包,启动</p><pre><code>ansible web -b -m service -a &quot;name=httpd state=started&quot;
+</code></pre></li><li><p>使用ad-hoc命令管理软件包,启动</p><pre><code>ansible docker -b -m service -a &quot;name=httpd state=started&quot;
 
 </code></pre></li></ul><h2 id=使用ansible-playbook-部署docker>使用ansible-playbook 部署docker</h2><ul><li><p>test-ansile.yml 文件内容</p><pre><code>---
 - hosts: docker
