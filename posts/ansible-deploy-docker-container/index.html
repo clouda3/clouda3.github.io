@@ -1,0 +1,101 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>使用ansible在多台客户机安装docker | 云端的blog</title><meta property="og:title" content="使用ansible在多台客户机安装docker - 云端的blog"><meta property="og:type" content="article"><meta property="article:published_time" content="2020-05-22T12:40:37&#43;08:00"><meta property="article:modified_time" content="2020-05-22T12:40:37&#43;08:00"><meta name=Keywords content><meta name=description content="how to use ansible to deploy docker to multiple host"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/ansible-deploy-docker-container/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>云端的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#install-ansible-on-server>Install ansible on server</a></li><li><a href=#ansible-优点>ansible 优点</a></li><li><a href=#ansible-centos-安装和配置>ansible(centos)安装和配置</a></li><li><a href=#使用ad-hoc-在客户执行命令-相当于命令行>使用ad-hoc 在客户执行命令，相当于命令行</a></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
+let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
+function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
+window.onscroll=function(){ishide();if((document.documentElement.scrollTop!=0)&&(floatTocDivElem.style.display=='block')){top();}};window.onresize=function(){ishide();}
+document.getElementById("toc_btn_open").addEventListener('click',function(){switch(tocListElem.style.display){case "none":document.getElementById("toc_btn_close").style.display="";tocListElem.style.display="";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="1px solid gray";break;default:break;}},false);document.getElementById("toc_btn_close").addEventListener('click',function(){switch(tocListElem.style.display){case "":document.getElementById("toc_btn_close").style.display="none";tocListElem.style.display="none";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="";break;default:break;}},false);}else{let fixedTocElem=document.getElementsByClassName("toc-article")[0];fixedTocElem.appendChild(tocNavElem);fixedTocElem.parentElement.style.display="";}
+document.getElementById("virtual_toc_list").remove();};</script><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>使用ansible在多台客户机安装docker</h1></header><date class="post-meta meta-date">2020年5月22日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/ansible>ansible</a></span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/docker>docker</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><h2 id=install-ansible-on-server>Install ansible on server</h2><ul><li>Ansible是一个开源配置管理工具，可以使用它来自动化任务，部署应用程序实现IT基础架构。Ansible可以用来自动化日常任务，比如，服务器的初始化配置、安全基线配置、更新和打补丁系统，安装软件包等</li><li>Ansible包括控制节点（Control node）也叫主机，受控节点（Managed nodes）也叫客户机,只在控制节点安装就好了</li></ul><h2 id=ansible-优点>ansible 优点</h2><ul><li>只需要在主机上安装ansible软件，客户机不需要安装</li><li>通讯协议SSH协议和SFTP</li><li>可并行执行程序，默认情况下，forks值为5，可以按需，在配置文件中增大该值</li></ul><h2 id=ansible-centos-安装和配置>ansible(centos)安装和配置</h2><ul><li><p>yum install ansible</p></li><li><p>为了使Ansible与客户端通信，需要使用用户帐户配置管理机和客户机。为了方便快捷安全，一般会配置证书方式连接客户机</p><pre><code>ssh-keygen
+ssh-copy-id ansible@node ip
+  
+</code></pre></li></ul><h2 id=使用ad-hoc-在客户执行命令-相当于命令行>使用ad-hoc 在客户执行命令，相当于命令行</h2><ul><li><p>/etc/ansible/hosts,最好谨慎使用hosts配置，安全问题需要解决</p><pre><code>[docker]
+
+192.168.25.173 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=&quot;xxx&quot;
+
+</code></pre></li><li><p>执行以下ping,命令里面的docker对应的上面文件的docker</p><pre><code>ansible docker -m ping
+
+</code></pre></li><li><p>使用ad-hoc命令管理软件包,安装</p><pre><code>ansible docker -m yum yum -a &quot;name=docker state=present&quot; -b
+
+</code></pre></li><li><p>使用ad-hoc命令管理软件包,设置默认启动</p><pre><code>ansible docker -b -m service -a &quot;name=docker  enabled=yes&quot;
+
+</code></pre></li><li><p>使用ad-hoc命令管理软件包,启动</p><pre><code>ansible web -b -m service -a &quot;name=httpd state=started&quot;
+</code></pre></li></ul><p>## 使用ansible-playbook 部署docker ##</p><ul><li><p>test-ansile.yml 文件内容</p><pre><code>---
+- hosts: docker
+remote_user: docker
+become: yes
+become_method: sudo
+vars:
+    container_name: &quot;robotic&quot;
+    container_image: &quot;test-prod:{{container_version}}&quot;
+    registry_url: &quot;ecr.test.amazonaws.com&quot;
+    working_dir: &quot;/data/docker_test&quot;
+
+tasks:
+    - name: remove container
+    docker_container:
+        name: &quot;{{ container_name }}&quot;
+        state: absent
+
+    - name: install aws cli
+    shell: |
+        yum install awscli -y
+    - name: rm config
+    shell: |
+        rm -rf /root/.aws;mkdir /root/.aws
+    - name: create config for aws user
+    shell: |
+        echo &quot;[profile ecr]&quot; &gt;&gt;/root/.aws/config
+        echo &quot;region = ap-southeast-1&quot; &gt;&gt;/root/.aws/config
+    - name: create credential
+    shell: |
+        echo &quot;[ecr]&quot; &gt;&gt;/root/.aws/credentials
+        echo &quot;aws_access_key_id = xxx&quot;  &gt;&gt;/root/.aws/credentials
+        echo &quot;aws_secret_access_key = xxx&quot;  &gt;&gt;/root/.aws/credentials
+    - name: docker login
+    shell: |
+        loginstr=`aws ecr get-login --no-include-email --profile ecr`
+        bash $loginstr
+    - name: create working_dir directory
+    file:
+        path: &quot;{{ item }}&quot;
+        state: directory
+    with_items:
+        - &quot;{{ working_dir }}&quot;
+
+    - name: create container
+    docker_container:
+        name: &quot;{{ container_name }}&quot;
+        image: &quot;{{registry_url}}/{{ container_image }}&quot;
+        privileged: yes
+        restart_policy: always
+        ports:
+        - &quot;80:80&quot;
+  
+</code></pre></li><li><p>执行ansible文件</p><pre><code>ansible-playbook -i /etc/ansible/hosts test-ansible.yml --extra-vars &quot;container_version=${BUILD_NUMBER}&quot;
+</code></pre></li></ul></div><div class="post-meta meta-tags"><ul class=clearfix><li><a href=https://clouda3.github.io/tags/ansible>ansible</a></li><li><a href=https://clouda3.github.io/tags/docker>docker</a></li></ul></div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/ansible-deploy-docker-container/ title=使用ansible在多台客户机安装docker>使用ansible在多台客户机安装docker</a></li><li><a href=https://clouda3.github.io/posts/linux-cerbot/ title=给nginx安装免费的证书>给nginx安装免费的证书</a></li><li><a href=https://clouda3.github.io/posts/linux-openvpn-install/ title=Openvpn最简单的安装方式>Openvpn最简单的安装方式</a></li><li><a href=https://clouda3.github.io/posts/linux-file-max-open/ title=linux最大文件打开数>linux最大文件打开数</a></li><li><a href=https://clouda3.github.io/posts/linux-tree/ title=linux的tree命令>linux的tree命令</a></li><li><a href=https://clouda3.github.io/posts/pptp-client/ title=vpn客户端工具pptp介绍>vpn客户端工具pptp介绍</a></li><li><a href=https://clouda3.github.io/posts/k8s-install-ingress/ title=k8s使用ingress总结>k8s使用ingress总结</a></li><li><a href=https://clouda3.github.io/posts/vagrant-windows-template/ title=vagrant使用介绍>vagrant使用介绍</a></li><li><a href=https://clouda3.github.io/posts/linux-lvm-resize/ title=lvm空间扩容>lvm空间扩容</a></li><li><a href=https://clouda3.github.io/posts/linux-key-gen/ title=centos使用ssh-key免密登录>centos使用ssh-key免密登录</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/ansible/>ansible (1)</a></li><li><a href=https://clouda3.github.io/categories/aws/>aws (17)</a></li><li><a href=https://clouda3.github.io/categories/cloud/>cloud (17)</a></li><li><a href=https://clouda3.github.io/categories/docker/>docker (2)</a></li><li><a href=https://clouda3.github.io/categories/gohugo/>gohugo (3)</a></li><li><a href=https://clouda3.github.io/categories/kubernets/>kubernets (1)</a></li><li><a href=https://clouda3.github.io/categories/linux/>linux (7)</a></li><li><a href=https://clouda3.github.io/categories/vagrant/>vagrant (1)</a></li><li><a href=https://clouda3.github.io/categories/vm/>vm (1)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/ansible/>ansible</a>
+<a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/cert/>cert</a>
+<a href=https://clouda3.github.io/tags/docker/>docker</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/ingress/>ingress</a>
+<a href=https://clouda3.github.io/tags/k8s/>k8s</a>
+<a href=https://clouda3.github.io/tags/linux/>linux</a>
+<a href=https://clouda3.github.io/tags/lvm/>lvm</a>
+<a href=https://clouda3.github.io/tags/maxfileopen/>maxfileopen</a>
+<a href=https://clouda3.github.io/tags/openvpn/>openvpn</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/sshkey/>sshkey</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a>
+<a href=https://clouda3.github.io/tags/vagrant/>vagrant</a>
+<a href=https://clouda3.github.io/tags/vm/>vm</a>
+<a href=https://clouda3.github.io/tags/vpn/>vpn</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2020 <a href=https://clouda3.github.io/>云端的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>
