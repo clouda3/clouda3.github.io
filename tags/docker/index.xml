@@ -5,4 +5,4 @@ ssh-keygen ssh-copy-id ansible@node ip 使用ad-hoc 在客户执行命令，相�
 ansible docker -m ping 使用ad-hoc命令管理软件包,安装
 ansible docker -m yum yum -a &amp;quot;name=docker state=present&amp;quot; -b 使用ad-hoc命令管理软件包,设置默认启动
 ansible docker -b -m service -a &amp;quot;name=docker enabled=yes&amp;quot; 使用ad-hoc命令管理软件包,启动
-ansible web -b -m service -a &amp;quot;name=httpd state=started&amp;quot; ## 使用ansible-playbook 部署docker ##</description></item></channel></rss>
+ansible web -b -m service -a &amp;quot;name=httpd state=started&amp;quot; 使用ansible-playbook 部署docker test-ansile.</description></item></channel></rss>
