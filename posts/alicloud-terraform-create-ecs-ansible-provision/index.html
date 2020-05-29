@@ -1,0 +1,277 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>| 云端的blog</title><meta property="og:title" content="- 云端的blog"><meta property="og:type" content="article"><meta name=Keywords content><meta name=description content><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/alicloud-terraform-create-ecs-ansible-provision/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>云端的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title></h1></header><date class="post-meta meta-date">1年1月1日</date><div class=post-content><h2 id=使用terraform创建ecs用ansible完成ecs的provision>使用terraform创建ecs用ansible完成ecs的provision</h2><ul><li>本文目标就是是用terraform创建ecs包括security group,disk,vpc,vswtich,然后用ansible来初始化和配置创建好的ecs</li><li>本文只是创建了一个单机ecs，后续的文章会有load balance出现</li></ul><h2 id=terrorm-创建ecs>terrorm 创建ecs</h2><ul><li>什么是terraform<ol><li>terraform是云工具，也就是针对云平台的</li><li>terraform是在云平台上管理资源的，就是一个云资源编排工具</li><li>terraform目标是&rdquo;Write, Plan, and create Infrastructure as Code&rdquo;, 基础架构即代码。具体的说就是可以用代码来管理维护 IT 资源，把之前需要手动操作的一部分任务通过程序来自动化的完成，这样的做的结果非常明显：高效、不易出错。</li></ol></li><li><p>Terraform 核心功能</p><ol><li>基础架构即代码(Infrastructure as Code)</li><li>执行计划(Execution Plans)</li><li>资源图(Resource Graph)</li><li>自动化变更(Change Automation)<br></li></ol></li><li><p>terraform安装</p><ol><li>下载<a href=https://www.terraform.io/downloads.html>https://www.terraform.io/downloads.html</a></li><li>设置环境变量（省略）<br></li></ol></li><li><p>创建terraform 配置文件</p><ol><li><p>main.tf</p><pre><code>provider &quot;alicloud&quot; {
+access_key = &quot;xxx&quot;
+secret_key = &quot;xxx&quot;
+region     = &quot;ap-southeast-1&quot;
+#version    = &quot;~&gt; 1.5.0&quot;
+}
+data &quot;alicloud_instance_types&quot; &quot;instance_type&quot; {
+instance_type_family = &quot;ecs.n1&quot;
+cpu_core_count       = &quot;1&quot;
+memory_size          = &quot;2&quot;
+}
+
+resource &quot;alicloud_security_group&quot; &quot;group&quot; {
+name        = var.short_name
+description = &quot;New security group&quot;
+vpc_id      = alicloud_vpc.vpc.id
+}
+
+resource &quot;alicloud_key_pair&quot; &quot;alicloud_key_pair&quot; {
+key_name   = &quot;terraform_test&quot;
+public_key = &quot;${file(var.ssh_key_public)}&quot;
+}
+resource &quot;alicloud_security_group_rule&quot; &quot;allow_http_80&quot; {
+type              = &quot;ingress&quot;
+ip_protocol       = &quot;tcp&quot;
+nic_type          = var.nic_type
+policy            = &quot;accept&quot;
+port_range        = &quot;80/80&quot;
+priority          = 1
+security_group_id = alicloud_security_group.group.id
+cidr_ip           = &quot;0.0.0.0/0&quot;
+}
+
+resource &quot;alicloud_security_group_rule&quot; &quot;allow_https_443&quot; {
+type              = &quot;ingress&quot;
+ip_protocol       = &quot;tcp&quot;
+nic_type          = var.nic_type
+policy            = &quot;accept&quot;
+port_range        = &quot;443/443&quot;
+priority          = 1
+security_group_id = alicloud_security_group.group.id
+cidr_ip           = &quot;0.0.0.0/0&quot;
+}
+resource &quot;alicloud_security_group_rule&quot; &quot;allow_ssh_22&quot; {
+type              = &quot;ingress&quot;
+ip_protocol       = &quot;tcp&quot;
+nic_type          = var.nic_type
+policy            = &quot;accept&quot;
+port_range        = &quot;22/22&quot;
+priority          = 1
+security_group_id = alicloud_security_group.group.id
+cidr_ip           = &quot;0.0.0.0/0&quot;
+}
+
+
+resource &quot;alicloud_disk&quot; &quot;disk&quot; {
+availability_zone = alicloud_instance.instance[0].availability_zone
+category          = var.disk_category
+size              = var.disk_size
+count             = var.number
+}
+
+resource &quot;alicloud_vpc&quot; &quot;vpc&quot; {
+cidr_block = &quot;172.16.0.0/12&quot;
+}
+
+data &quot;alicloud_zones&quot; &quot;zones_ds&quot; {
+available_instance_type = data.alicloud_instance_types.instance_type.instance_types[0].id
+}
+
+resource &quot;alicloud_vswitch&quot; &quot;vswitch&quot; {
+vpc_id            = alicloud_vpc.vpc.id
+cidr_block        = &quot;172.16.0.0/24&quot;
+availability_zone = data.alicloud_zones.zones_ds.zones[0].id
+}
+resource &quot;alicloud_instance&quot; &quot;instance&quot; {
+instance_name   = &quot;${var.short_name}-${var.role}-${format(var.count_format, count.index + 1)}&quot;
+host_name       = &quot;${var.short_name}-${var.role}-${format(var.count_format, count.index + 1)}&quot;
+image_id        = var.image_id
+instance_type   = data.alicloud_instance_types.instance_type.instance_types[0].id
+count           = var.number
+security_groups = alicloud_security_group.group.*.id
+vswitch_id      = alicloud_vswitch.vswitch.id
+
+internet_charge_type       = var.internet_charge_type
+internet_max_bandwidth_out = var.internet_max_bandwidth_out
+
+password = var.ecs_password
+
+instance_charge_type          = &quot;PostPaid&quot;
+system_disk_category          = &quot;cloud_efficiency&quot;
+security_enhancement_strategy = &quot;Deactive&quot;
+key_name = alicloud_key_pair.alicloud_key_pair.key_name
+data_disks {
+    name        = &quot;disk1&quot;
+    size        = &quot;20&quot;
+    category    = &quot;cloud_efficiency&quot;
+    description = &quot;disk1&quot;
+}
+tags = {
+    role = var.role
+    dc   = var.datacenter
+}
+
+resource &quot;alicloud_disk_attachment&quot; &quot;instance-attachment&quot; {
+count       = var.number
+disk_id     = alicloud_disk.disk.*.id[count.index]
+instance_id = alicloud_instance.instance.*.id[count.index]
+}
+
+</code></pre></li><li><p>outputs.tf</p><pre><code>output &quot;hostname_list&quot; {
+value = join(&quot;,&quot;, alicloud_instance.instance.*.instance_name)
+}
+
+output &quot;ecs_ids&quot; {
+value = join(&quot;,&quot;, alicloud_instance.instance.*.id)
+}
+
+output &quot;ecs_public_ip&quot; {
+value = join(&quot;,&quot;, alicloud_instance.instance.*.public_ip)
+}
+
+output &quot;tags&quot; {
+value = jsonencode(alicloud_instance.instance.*.tags)
+}
+
+</code></pre></li><li><p>variables.tf</p><pre><code>variable &quot;number&quot; {
+default = &quot;1&quot;
+}
+
+variable &quot;count_format&quot; {
+default = &quot;%02d&quot;
+}
+
+variable &quot;image_id&quot; {
+default = &quot;ubuntu_18_04_64_20G_alibase_20190624.vhd&quot;
+}
+
+variable &quot;role&quot; {
+default = &quot;work&quot;
+}
+
+variable &quot;datacenter&quot; {
+default = &quot;beijing&quot;
+}
+
+variable &quot;short_name&quot; {
+default = &quot;hi&quot;
+}
+
+variable &quot;ecs_type&quot; {
+default = &quot;ecs.n4.small&quot;
+}
+
+variable &quot;ecs_password&quot; {
+default = &quot;Test12345&quot;
+}
+
+variable &quot;internet_charge_type&quot; {
+default = &quot;PayByTraffic&quot;
+}
+
+variable &quot;internet_max_bandwidth_out&quot; {
+default = 5
+}
+
+variable &quot;disk_category&quot; {
+default = &quot;cloud_efficiency&quot;
+}
+
+variable &quot;disk_size&quot; {
+default = &quot;40&quot;
+}
+
+variable &quot;nic_type&quot; {
+default = &quot;intranet&quot;
+}
+variable &quot;ssh_key_public&quot; {
+default     = &quot;~/.ssh/id_rsa.pub&quot;
+description = &quot;Path to the SSH public key for accessing cloud instances. Used for creating AWS keypair.&quot;
+}
+
+variable &quot;ssh_key_private&quot; {
+default     = &quot;~/.ssh/id_rsa&quot;
+description = &quot;Path to the SSH public key for accessing cloud instances. Used for creating AWS keypair.&quot;
+}
+
+</code></pre></li><li><p>versions.tf</p><pre><code>terraform {
+required_version = &quot;&gt;= 0.12&quot;
+}
+
+</code></pre></li></ol></li></ul><h3 id=是用ansible在ecs上部署nginx的docker容器>是用ansible在ecs上部署nginx的docker容器</h3><ul><li>ansible介绍<ol><li>Ansible是一个开源配置管理工具，可以使用它来自动化任务，部署应用程序实现IT基础架构。Ansible可以用来自动化日常任务，比如，服务器的初始化配置、安全基线配置、更新和打补丁系统，安装软件包等。Ansible架构相对比较简单，仅需通过SSH连接客户机执行任务即可</li></ol></li><li><p>ansible安装</p><pre><code>yum install ansible -y
+
+</code></pre></li><li><p>更新配置</p><pre><code>vi /etc/ansible/ansible.cfg
+
+host_key_checking = False
+</code></pre></li><li><p>创建ansible playbook 模板代码</p><pre><code>---
+  - hosts: docker
+    remote_user: root
+    become: yes
+    become_method: sudo
+    vars:
+      container_name: &quot;nginx&quot;
+      container_image: &quot;nginx:latest&quot;
+      registry_url: &quot;docker.io/library&quot;
+      working_dir: &quot;/data/nginx&quot;
+
+    tasks:
+      - name: remove container
+        docker_container:
+          name: &quot;{{ container_name }}&quot;
+          state: absent
+          timeout: 600
+      - name: create working_dir directory
+        file:
+          path: &quot;{{ item }}&quot;
+          state: directory
+        with_items:
+          - &quot;{{ working_dir }}&quot;
+
+      - name: create container
+        docker_container:
+          name: &quot;{{ container_name }}&quot;
+          image: &quot;{{registry_url}}/{{ container_image }}&quot;
+          privileged: yes
+          timeout: 600
+          restart_policy: always
+          ports:
+            - &quot;80:80&quot;
+
+
+</code></pre></li><li><p>在terraform的ecs的instance 中使用provisoner 来支持ansible</p><pre><code>provisioner &quot;remote-exec&quot; {
+    # Install Python for Ansible
+    inline = [&quot;apt update;apt install python -y;rm -rf /usr/bin/python;apt install python3-pip -y;rm -rf /usr/local/bin/pip;ln -s /usr/bin/pip3 /usr/local/bin/pip;pip install docker;apt install docker.io -y;&quot;]
+    connection {
+    host = &quot;${self.public_ip}&quot;
+    type        = &quot;ssh&quot;
+    user        = &quot;root&quot;
+    private_key = &quot;${file(var.ssh_key_private)}&quot;
+    }
+}
+provisioner &quot;local-exec&quot; {
+command = &quot;echo '[docker]' &gt; ./myinventory;echo '${self.public_ip}' &gt;&gt; ./myinventory&quot;
+}
+provisioner &quot;local-exec&quot; {
+    command = &quot;ansible-playbook -u root -i myinventory --private-key ${var.ssh_key_private} -T 300 provision.yml&quot;
+}
+
+</code></pre></li></ul><h2 id=执行-terraform>执行 terraform</h2><pre><code>    terraform int
+    terraform plan
+    terraform apply
+</code></pre></div><div class="post-meta meta-tags">没有标签</div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/ansible-deploy-docker-container/ title=使用ansible在多台客户机安装docker>使用ansible在多台客户机安装docker</a></li><li><a href=https://clouda3.github.io/posts/linux-cerbot/ title=给nginx安装免费的证书>给nginx安装免费的证书</a></li><li><a href=https://clouda3.github.io/posts/linux-openvpn-install/ title=Openvpn最简单的安装方式>Openvpn最简单的安装方式</a></li><li><a href=https://clouda3.github.io/posts/linux-file-max-open/ title=linux最大文件打开数>linux最大文件打开数</a></li><li><a href=https://clouda3.github.io/posts/linux-tree/ title=linux的tree命令>linux的tree命令</a></li><li><a href=https://clouda3.github.io/posts/pptp-client/ title=vpn客户端工具pptp介绍>vpn客户端工具pptp介绍</a></li><li><a href=https://clouda3.github.io/posts/k8s-install-ingress/ title=k8s使用ingress总结>k8s使用ingress总结</a></li><li><a href=https://clouda3.github.io/posts/vagrant-windows-template/ title=vagrant使用介绍>vagrant使用介绍</a></li><li><a href=https://clouda3.github.io/posts/linux-lvm-resize/ title=lvm空间扩容>lvm空间扩容</a></li><li><a href=https://clouda3.github.io/posts/linux-key-gen/ title=centos使用ssh-key免密登录>centos使用ssh-key免密登录</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/ansible/>ansible (1)</a></li><li><a href=https://clouda3.github.io/categories/aws/>aws (17)</a></li><li><a href=https://clouda3.github.io/categories/cloud/>cloud (17)</a></li><li><a href=https://clouda3.github.io/categories/docker/>docker (2)</a></li><li><a href=https://clouda3.github.io/categories/gohugo/>gohugo (3)</a></li><li><a href=https://clouda3.github.io/categories/kubernets/>kubernets (1)</a></li><li><a href=https://clouda3.github.io/categories/linux/>linux (7)</a></li><li><a href=https://clouda3.github.io/categories/vagrant/>vagrant (1)</a></li><li><a href=https://clouda3.github.io/categories/vm/>vm (1)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/ansible/>ansible</a>
+<a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/cert/>cert</a>
+<a href=https://clouda3.github.io/tags/docker/>docker</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/ingress/>ingress</a>
+<a href=https://clouda3.github.io/tags/k8s/>k8s</a>
+<a href=https://clouda3.github.io/tags/linux/>linux</a>
+<a href=https://clouda3.github.io/tags/lvm/>lvm</a>
+<a href=https://clouda3.github.io/tags/maxfileopen/>maxfileopen</a>
+<a href=https://clouda3.github.io/tags/openvpn/>openvpn</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/sshkey/>sshkey</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a>
+<a href=https://clouda3.github.io/tags/vagrant/>vagrant</a>
+<a href=https://clouda3.github.io/tags/vm/>vm</a>
+<a href=https://clouda3.github.io/tags/vpn/>vpn</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2020 <a href=https://clouda3.github.io/>云端的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>
