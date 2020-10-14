@@ -3,13 +3,7 @@
 <a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
 <a href=https://clouda3.github.io/about title=About>About</a>
 <a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/jenkins_create_new_node/ title=如何配置jenkins新节点>如何配置jenkins新节点</a></h1></header><date class="post-meta meta-date">2020年10月13日</date><div class=post-meta><span>|</span>
-<span class=meta-category><a href=https://clouda3.github.io/categories/jenkins>jenkins</a></span></div><div class=post-content>jenkins 节点 简介 在企业里面使用Jenkins自动部署时，大部分企业更新发布几个软件版本,但是对于一些公司有非常多的业务线或者产品来说，Jenkins就需要同时处理很多的任务，这时候就需要借助Jenkins多个node或者我们所说的Jenkins分布式SLAVE节点，来分开处理多个产品或者业务线的部署，目的就是master节点用来分配任务，slave节点来具体执行部署任务
-配置 slave节点 jenkins -&gt;manage jenins -&gt; manage node and cloud -&gt;new node
-node name:test ,选择permanent node
-填好number of executors:1 ,remote root,launch method:launch agent via ssh,Host,Credentials, Host Key Verification Strategy,known hosts file verification strategy ,availability:keep agent online as much as possible
-在slave上安装各种需要软件
-一定要安装相关的plugin和global tool configuration里面配置相关的工具软件 e
-创建一个pipeline测试一下
+<span class=meta-category><a href=https://clouda3.github.io/categories/jenkins>jenkins</a></span></div><div class=post-content>jenkins 节点 简介 在企业里面使用Jenkins自动部署时，大部分企业更新发布几个软件版本,但是对于一些公司有非常多的业务线或者产品来说，Jenkins就需要同时处理很多的任务，这时候就需要借助Jenkins多个node或者我们所说的Jenkins分布式SLAVE节点，来分开处理多个产品或者业务线的部署，目的就是master节点用来分配任务，slave节点来具体执行部署任务 配置 slave节点 jenkins -&gt;manage jenins -&gt; manage node and cloud -&gt;new node node name:test ,选择permanent node 填好number of executors:1 ,remote root,launch method:launch agent via ssh,Host,Credentials, Host Key Verification Strategy,known hosts file verification strategy ,availability:keep agent online as much as possible 在slave上安装各种需要软件 一定要安装相关的plugin和global tool configuration里面配置相关的工具软件 e 创建一个pipeline测试一下
 pipeline { agent any stages { stage('Example') { steps { echo 'Hello World' } } } post { always { echo 'I will .……</div><p class=readmore><a href=https://clouda3.github.io/posts/jenkins_create_new_node/>阅读全文</a></p></article><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/linux-tcp-udp-port-test/ title=如何测试linux的tcp和udp端口>如何测试linux的tcp和udp端口</a></h1></header><date class="post-meta meta-date">2020年6月2日</date><div class=post-meta><span>|</span>
 <span class=meta-category><a href=https://clouda3.github.io/categories/linux>linux</a></span></div><div class=post-content>如何测试linux的tcp和udp端口 测试tcp 一般用使用 telnet
 telnet 192.168.12.10 22 telnet 不支持udp协议，所以我们可以使用nc,nc可以支持tcp也可以支持udp
