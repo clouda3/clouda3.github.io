@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vpc on 云端的blog</title><link>https://clouda3.github.io/tags/vpc/</link><description>Recent content in vpc on 云端的blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 28 Jul 2021 12:40:37 +0800</lastBuildDate><atom:link href="https://clouda3.github.io/tags/vpc/index.xml" rel="self" type="application/rss+xml"/><item><title>阿里云架构-使用privatelink让不同的vpc的服务可以访问</title><link>https://clouda3.github.io/posts/alicloud_privatelink/</link><pubDate>Wed, 28 Jul 2021 12:40:37 +0800</pubDate><guid>https://clouda3.github.io/posts/alicloud_privatelink/</guid><description> 本来使用工具或者服务 Alicloud vpc SLB PrivateLink endpoit zone and service ECS 架构图 架构说明 对于两个网络（VPC-A，VPC-B）的ECS提供的服务，要是A访问B，可以提供以下方案
+B通过EIP或者IP或者绑定SLB，通过SLB的IP把B的服务暴露在公网上 A网络和B网络互联 通过privatelink来单向向让A网络的访问B网络的服务 分析上面优缺点
+安全性不好，把服务暴露在公网 A和B网络直接互联创建路由成本太高，第二就是可能会造成网络冲突 通过privatelink私有网络连接成本低廉，单向的内网服务，不改变各自的网络配置 Privatelink 如何创建privatelink服务
+privatelind endpoint service：需要关联一个SLB，此slb必须支持privatelink的SLB，slb后面就是ECS或者其他的rds等都可以
+privatelink endpoint 创建的是时候需要跟endpoint service 连接 一旦创建并且链接成功，那么privatelink就可以生效了
+privatelink endpoint 有一个DNS地址，我们可以通过地址直接访问，此地址是aliyun内网地址</description></item></channel></rss>
