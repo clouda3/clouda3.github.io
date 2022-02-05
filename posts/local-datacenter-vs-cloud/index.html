@@ -2,7 +2,7 @@
 <a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
 <a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
 <a href=https://clouda3.github.io/about title=About>About</a>
-<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#本文简介>本文简介</a></li><li><a href=#本系统简介>本系统简介</a></li><li><a href=#本系统的架构图>本系统的架构图</a></li><li><a href=#本系統本地使用硬件>本系統本地使用硬件</a></li><li><a href=#本地數據中心存在的主要問題>本地數據中心存在的主要問題</a></li><li><a href=#如果選擇阿里雲或者aws-這裏拿阿里雲來説>如果選擇阿里雲或者aws（這裏拿阿里雲來説）</a></li><li><a href=#總結>總結</a></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#本文简介>本文简介</a></li><li><a href=#本系统简介>本系统简介</a></li><li><a href=#本系统的架构图>本系统的架构图</a></li><li><a href=#本系統本地使用硬件>本系統本地使用硬件</a></li><li><a href=#本地數據中心存在的主要問題>本地數據中心存在的主要問題</a><ul><li><a href=#硬件的問題>硬件的問題</a></li><li><a href=#軟件的問題>軟件的問題</a></li></ul></li><li><a href=#如果選擇阿里雲或者aws-這裏拿阿里雲來説>如果選擇阿里雲或者aws（這裏拿阿里雲來説）</a></li><li><a href=#總結>總結</a></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
 <strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
 let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
 function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
@@ -16,10 +16,10 @@ Kafka | cluster | centos8.2 | 5 | ssd | 5*4 raid5|
 Elatic search | cluster | centos8.2 | 3 | ssd | 5*4 raid5|
 Flink | cluster | centos8.2 | 3 | ssd | 5*4 raid5|
 Polygon subscriber | single | centos8.2 | 1 | ssd | 5*4 raid5 |
-APP | single | centos8.2 | 1 | ssd | 5*4 raid5 |</p><h2 id=本地數據中心存在的主要問題>本地數據中心存在的主要問題</h2><p>### 硬件的問題
-1. 硬盤如果寫滿，可擴展性非常的差，或者説磁盤出現損壞，需要更新磁盤都會有數據丟失的風險，并且服務會中斷
-2. 網絡設備沒有redundency
-3. 如果内存不夠用都需要定制内存，然後安裝，需要消耗大量的人力物力</p><p>### 軟件的問題</p><pre><code> 1. centos的系統的優化，包括swap,硬盤的分區，文件句柄數等等
+APP | single | centos8.2 | 1 | ssd | 5*4 raid5 |</p><h2 id=本地數據中心存在的主要問題>本地數據中心存在的主要問題</h2><h3 id=硬件的問題>硬件的問題</h3><pre><code> 1. 硬盤如果寫滿，可擴展性非常的差，或者説磁盤出現損壞，需要更新磁盤都會有數據丟失的風險，并且服務會中斷
+ 2. 網絡設備沒有redundency
+ 3. 如果内存不夠用都需要定制内存，然後安裝，需要消耗大量的人力物力
+</code></pre><h3 id=軟件的問題>軟件的問題</h3><pre><code> 1. centos的系統的優化，包括swap,硬盤的分區，文件句柄數等等
  2. kafka flink elasticsearch 等軟件的優化需要非常專業的知識
  3. 如果要遷移kafka 或者es裏面的數據只能停止服務，然後進行數據的遷移
 </code></pre><h2 id=如果選擇阿里雲或者aws-這裏拿阿里雲來説>如果選擇阿里雲或者aws（這裏拿阿里雲來説）</h2><pre><code>1. 定制vpc網絡，阿里雲網絡外網基於bgp的，vpc本身就保障HA，redundency.
