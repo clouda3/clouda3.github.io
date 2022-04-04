@@ -1,0 +1,57 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>devops | 云端的blog</title><meta property="og:title" content="devops - 云端的blog"><meta property="og:type" content="article"><meta name=Keywords content><meta name=description content="devops"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/tags/devops/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/style.css><link rel=alternate type=application/rss+xml+xml href=https://clouda3.github.io/tags/devops/index.xml title=云端的blog><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>云端的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><h3 class=archive-title>包含标签
+<span class=keyword>devops</span>
+的文章</h3><article class=post><header><h1 class=post-title><a href=https://clouda3.github.io/posts/ansible-devops-tools/>Ansible简介</a></h1></header><date class="post-meta meta-date">2017年3月6日</date><div class="post-meta meta-category">|
+<a href=https://clouda3.github.io/categories/devops>devops</a></div><div class=post-content>Ansible 简介 ansible是基于Python开发，集合了众多运维工具（puppet、chef）的优点，实现了批量系统配置、批量程序部署、批量运行命令等功能。最大的特点就是ansible不需要在远程主机上安装client/agents，因为它们是基于ssh来和远程主机通讯的。ansible目前已经已经被红帽官方收购，是自动化运维工具中大家认可度最高的，并且上手容易，学习简单。是每位运维工程师必须掌握的技能之一。 ## 特点 ##
+部署简单，只需在主控端部署Ansible环境，被控端无需做任何操作； 默认使用SSH协议对设备进行管理； 有大量常规运维操作模块，可实现日常绝大部分操作； 配置简单、功能强大、扩展性强； 支持API及自定义模块，可通过Python轻松扩展； 通过Playbooks来定制强大的配置、状态管理； 轻量级，无需在客户端安装agent，更新时，只需在操作机上进行一次更新即可； 提供一个功能强大、操作性强的Web管理界面和REST API接口——AWX平台。 任务执行方式 ad-hoc模式(点对点模式)
+使用单个模块，支持批量执行单条命令。ad-hoc 命令是一种可以快速输入的命令，而且不需要保存起来的命令。就相当于bash中的一句话shell。
+playbook模式
+是Ansible主要管理方式，也是Ansible功能强大的关键所在。playbook通过多个task集合完成一类功能.比如我们拷贝一个文件到主机，然后授予权限，然后启动程序这几个步骤结合在一起
+Aansbile 文件和命令 ansible.cfg
+inventory = /etc/ansible/hosts #这个参数表示资源清单inventory文件的位置 library = /usr/share/ansible #指向存放Ansible模块的目录，支持多个目录方式，只要用冒号（：）隔开就可以 forks = 5 #并发连接数，默认为5 sudo_user = root #设置默认执行命令的用户 remote_port = 22 #指定连接被管节点的管理端口，默认为22端口，建议修改，能够更加安全 host_key_checking = False #设置是否检查SSH主机的密钥，值为True/False。关闭后第一次连接不会提示配置实例 timeout = 60 #设置SSH连接的超时时间，单位为秒 log_path = /var/log/ansible.log #指定一个存储ansible日志的文件（默认不记录日志） inventory 文件
+不分组……<p class=readmore><a href=https://clouda3.github.io/posts/ansible-devops-tools/>阅读全文</a></p></div></article></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/centos-8-maintenance-stopped/ title="Centos 8維護已經停止了">Centos 8維護已經停止了</a></li><li><a href=https://clouda3.github.io/posts/polygon-websoket-data-transfer-issue/ title=Polygon在websoket的连接串数据的经常中断>Polygon在websoket的连接串数据的经常中断</a></li><li><a href=https://clouda3.github.io/posts/application-network-issue-caused-thread-block/ title=交换机故障导致线程阻塞>交换机故障导致线程阻塞</a></li><li><a href=https://clouda3.github.io/posts/alicloud_privatelink/ title=阿里云架构-使用privatelink让不同的vpc的服务可以访问>阿里云架构-使用privatelink让不同的vpc的服务可以访问</a></li><li><a href=https://clouda3.github.io/posts/point-to-point-network-transfer-speed-test/ title=網絡服務器點對點的網速測試>網絡服務器點對點的網速測試</a></li><li><a href=https://clouda3.github.io/posts/aws-cdk/ title="aws cdk introduction">aws cdk introduction</a></li><li><a href=https://clouda3.github.io/posts/local-datacenter-vs-cloud/ title=本地数据中心和云的对比>本地数据中心和云的对比</a></li><li><a href=https://clouda3.github.io/posts/kafka-cluster-setup/ title="kafka cluster的搭建">kafka cluster的搭建</a></li><li><a href=https://clouda3.github.io/posts/alicloud-terraform-create-ecs-ansible-provision/ title=使用terraform创建阿里ecs用ansible完成主机配置>使用terraform创建阿里ecs用ansible完成主机配置</a></li><li><a href=https://clouda3.github.io/posts/ansible-deploy-docker-container/ title=使用ansible在多台客户机安装docker>使用ansible在多台客户机安装docker</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/alicloud/>Alicloud (1)</a></li><li><a href=https://clouda3.github.io/categories/ansible/>ansible (2)</a></li><li><a href=https://clouda3.github.io/categories/architect/>architect (1)</a></li><li><a href=https://clouda3.github.io/categories/aws/>aws (18)</a></li><li><a href=https://clouda3.github.io/categories/cdk/>cdk (1)</a></li><li><a href=https://clouda3.github.io/categories/centos/>centos (1)</a></li><li><a href=https://clouda3.github.io/categories/cloud/>cloud (20)</a></li><li><a href=https://clouda3.github.io/categories/devops/>devops (1)</a></li><li><a href=https://clouda3.github.io/categories/docker/>docker (3)</a></li><li><a href=https://clouda3.github.io/categories/gohugo/>gohugo (3)</a></li><li><a href=https://clouda3.github.io/categories/java/>java (2)</a></li><li><a href=https://clouda3.github.io/categories/jenkins/>jenkins (1)</a></li><li><a href=https://clouda3.github.io/categories/kafka/>kafka (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernetes/>kubernetes (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernets/>kubernets (1)</a></li><li><a href=https://clouda3.github.io/categories/linux/>linux (11)</a></li><li><a href=https://clouda3.github.io/categories/polygon/>polygon (1)</a></li><li><a href=https://clouda3.github.io/categories/terraform/>terraform (1)</a></li><li><a href=https://clouda3.github.io/categories/vagrant/>vagrant (1)</a></li><li><a href=https://clouda3.github.io/categories/vm/>vm (1)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/ansible/>ansible</a>
+<a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/baremetal/>baremetal</a>
+<a href=https://clouda3.github.io/tags/block/>block</a>
+<a href=https://clouda3.github.io/tags/cdk/>cdk</a>
+<a href=https://clouda3.github.io/tags/centos/>centos</a>
+<a href=https://clouda3.github.io/tags/cert/>cert</a>
+<a href=https://clouda3.github.io/tags/cloud/>cloud</a>
+<a href=https://clouda3.github.io/tags/datacenter/>Datacenter</a>
+<a href=https://clouda3.github.io/tags/devops/>devops</a>
+<a href=https://clouda3.github.io/tags/docker/>docker</a>
+<a href=https://clouda3.github.io/tags/epel/>epel</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/ingress/>ingress</a>
+<a href=https://clouda3.github.io/tags/java/>java</a>
+<a href=https://clouda3.github.io/tags/jdk/>jdk</a>
+<a href=https://clouda3.github.io/tags/jenkins/>jenkins</a>
+<a href=https://clouda3.github.io/tags/jvm/>JVM</a>
+<a href=https://clouda3.github.io/tags/k8s/>k8s</a>
+<a href=https://clouda3.github.io/tags/kafka/>kafka</a>
+<a href=https://clouda3.github.io/tags/linux/>linux</a>
+<a href=https://clouda3.github.io/tags/lvm/>lvm</a>
+<a href=https://clouda3.github.io/tags/maxfileopen/>maxfileopen</a>
+<a href=https://clouda3.github.io/tags/openvpn/>openvpn</a>
+<a href=https://clouda3.github.io/tags/pipeline/>pipeline</a>
+<a href=https://clouda3.github.io/tags/polygon/>polygon</a>
+<a href=https://clouda3.github.io/tags/privatelink/>privatelink</a>
+<a href=https://clouda3.github.io/tags/producer/>producer</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/sshkey/>sshkey</a>
+<a href=https://clouda3.github.io/tags/terraform/>terraform</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a>
+<a href=https://clouda3.github.io/tags/vagrant/>vagrant</a>
+<a href=https://clouda3.github.io/tags/vm/>vm</a>
+<a href=https://clouda3.github.io/tags/vpc/>vpc</a>
+<a href=https://clouda3.github.io/tags/vpn/>vpn</a>
+<a href=https://clouda3.github.io/tags/websocket/>websocket</a>
+<a href=https://clouda3.github.io/tags/zookeeper/>zookeeper</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2022 <a href=https://clouda3.github.io/>云端的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>

@@ -109,7 +109,14 @@ Requires libc.so.6()(64bit) libc.so.6(GLIBC_2.14)(64bit) libc.so.6(GLIBC_2.2.5)(
 openvpn搭建借助于第三方脚本 作者git：https://github.com/Nyr/openvpn-install
 wget https://git.io/vpn -O openvpn-install.sh &amp;amp;&amp;amp; bash openvpn-install.sh 最后生成一个*.ovpn文件
 下载并安装openvpn gui：https://openvpn.net/community-downloads/
-用安装好的客户端打开*.ovpn就可以登录远程的vpn服务器了</description></item><item><title>linux最大文件打开数</title><link>https://clouda3.github.io/posts/linux-file-max-open/</link><pubDate>Sat, 07 May 2016 10:30:37 +0800</pubDate><guid>https://clouda3.github.io/posts/linux-file-max-open/</guid><description> 文件最大打开数 如果服务器提供TCP服务（TCP层或者HTTP层），在并发访问量持续很高时，容易产生too many open files错误。这时查看netstat可以发现很多TIME_WAIT状态的链接，这说明大量链接处于半开状态，已经完成了请求响应，然后进行下一步操作，如果句柄数(文件打开数)超过了阈值，那就只能等待或者出错 解决方案 系统内核的修改
+用安装好的客户端打开*.ovpn就可以登录远程的vpn服务器了</description></item><item><title>Ansible简介</title><link>https://clouda3.github.io/posts/ansible-devops-tools/</link><pubDate>Mon, 06 Mar 2017 11:40:00 +0800</pubDate><guid>https://clouda3.github.io/posts/ansible-devops-tools/</guid><description>Ansible 简介 ansible是基于Python开发，集合了众多运维工具（puppet、chef）的优点，实现了批量系统配置、批量程序部署、批量运行命令等功能。最大的特点就是ansible不需要在远程主机上安装client/agents，因为它们是基于ssh来和远程主机通讯的。ansible目前已经已经被红帽官方收购，是自动化运维工具中大家认可度最高的，并且上手容易，学习简单。是每位运维工程师必须掌握的技能之一。 ## 特点 ##
+部署简单，只需在主控端部署Ansible环境，被控端无需做任何操作； 默认使用SSH协议对设备进行管理； 有大量常规运维操作模块，可实现日常绝大部分操作； 配置简单、功能强大、扩展性强； 支持API及自定义模块，可通过Python轻松扩展； 通过Playbooks来定制强大的配置、状态管理； 轻量级，无需在客户端安装agent，更新时，只需在操作机上进行一次更新即可； 提供一个功能强大、操作性强的Web管理界面和REST API接口——AWX平台。 任务执行方式 ad-hoc模式(点对点模式)
+使用单个模块，支持批量执行单条命令。ad-hoc 命令是一种可以快速输入的命令，而且不需要保存起来的命令。就相当于bash中的一句话shell。
+playbook模式
+是Ansible主要管理方式，也是Ansible功能强大的关键所在。playbook通过多个task集合完成一类功能.比如我们拷贝一个文件到主机，然后授予权限，然后启动程序这几个步骤结合在一起
+Aansbile 文件和命令 ansible.cfg
+inventory = /etc/ansible/hosts #这个参数表示资源清单inventory文件的位置 library = /usr/share/ansible #指向存放Ansible模块的目录，支持多个目录方式，只要用冒号（：）隔开就可以 forks = 5 #并发连接数，默认为5 sudo_user = root #设置默认执行命令的用户 remote_port = 22 #指定连接被管节点的管理端口，默认为22端口，建议修改，能够更加安全 host_key_checking = False #设置是否检查SSH主机的密钥，值为True/False。关闭后第一次连接不会提示配置实例 timeout = 60 #设置SSH连接的超时时间，单位为秒 log_path = /var/log/ansible.log #指定一个存储ansible日志的文件（默认不记录日志） inventory 文件
+不分组</description></item><item><title>linux最大文件打开数</title><link>https://clouda3.github.io/posts/linux-file-max-open/</link><pubDate>Sat, 07 May 2016 10:30:37 +0800</pubDate><guid>https://clouda3.github.io/posts/linux-file-max-open/</guid><description> 文件最大打开数 如果服务器提供TCP服务（TCP层或者HTTP层），在并发访问量持续很高时，容易产生too many open files错误。这时查看netstat可以发现很多TIME_WAIT状态的链接，这说明大量链接处于半开状态，已经完成了请求响应，然后进行下一步操作，如果句柄数(文件打开数)超过了阈值，那就只能等待或者出错 解决方案 系统内核的修改
 cat /proc/sys/fs/file-max sysctl -a sysctl -p 每个用户级别的修改
 ulimit -n 1024000 (临时修改) vim /etc/security/limits.conf * soft nofile 2048 * hard nofile 2048 如果阿里云或者aws云里面的centos都是被优化过的，默认的1024都被修改成了65536了，所以对于大部分人来说足够用了</description></item><item><title>linux的tree命令</title><link>https://clouda3.github.io/posts/linux-tree/</link><pubDate>Fri, 06 May 2016 10:30:37 +0800</pubDate><guid>https://clouda3.github.io/posts/linux-tree/</guid><description>linux tree command Centos 是默认不带tree 命令的，如果要使用首先要install tree command
 yum install -y tree 使用tree 显示目录的深度为2级
