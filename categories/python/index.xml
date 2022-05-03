@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on 云端的blog</title><link>https://clouda3.github.io/categories/python/</link><description>Recent content in python on 云端的blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 May 2017 10:30:37 +0800</lastBuildDate><atom:link href="https://clouda3.github.io/categories/python/index.xml" rel="self" type="application/rss+xml"/><item><title>python一些集合</title><link>https://clouda3.github.io/posts/pythyon_collection/</link><pubDate>Thu, 04 May 2017 10:30:37 +0800</pubDate><guid>https://clouda3.github.io/posts/pythyon_collection/</guid><description>Python 面試題目 列表（list）和元组（tuple）有什么区别？
+列表是可变的。创建后可以对其进行修改 元组是不可变的。元组一旦创建，就不能对其进行更改 列表表示的是顺序。它们是有序序列，通常是同一类型的对象 [&amp;ldquo;APPLE&amp;rdquo;,&amp;ldquo;PEAR&amp;rdquo;,&amp;ldquo;ORANGE&amp;rdquo;] 元组表示的是结构。可以用来存储不同数据类型的元素 [1,&amp;ldquo;eric&amp;rdquo;,1999-08-10,24] 什么是装饰器（decorator）
+解释Range函数
+解释map函数的工作原理
+解释reduce函数的工作原理。
+解释filter函数的工作原理
+Python是按引用调用还是按值调用？
+列表乘法是如何工作的?
+类中的“self”指的是什么？
+如何在Python中连接列表？
+列表和数组有什么区别？ list vs array
+Pandas
+举出几个可变和不可变对象的例子
+模块（module）和包（package）有什么区别？
+在迭代序列时，为什么要使用enumerate？
+pass、continue和break之间有什么区别?
+如何将for循环转换为使用递推式构造列表（list comprehension）？
+Python中的异常处理是如何进行的？
+什么是init?init是Python中的方法或者结构。
+什么是lambda函数？
+Python中的self是什么？self是类的实例或对象。
+Python中的函数方法是什么？
+python中是否需要缩进？
+python是否区分大小写？
+Python中的局部变量和全局变量是什么？
+什么是python模块？Python中有哪些常用的内置模块？
+Python中的命名空间是什么？
+如何在Python中管理内存？</description></item></channel></rss>
