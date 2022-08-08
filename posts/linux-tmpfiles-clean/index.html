@@ -1,0 +1,71 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>linux 临时文件的管理 | 云端的blog</title><meta property="og:title" content="linux 临时文件的管理 - 云端的blog"><meta property="og:type" content="article"><meta property="article:published_time" content="2022-05-07T10:30:37&#43;08:00"><meta property="article:modified_time" content="2022-05-07T10:30:37&#43;08:00"><meta name=Keywords content><meta name=description content="linux 临时文件的管理"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/linux-tmpfiles-clean/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>云端的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><a href=#centos临时目录的系统管理>Centos临时目录的系统管理</a></li><li><a href=#配置文件-优先级从上到下>配置文件，优先级从上到下。</a></li><li><a href=#定期清理timer>定期清理timer</a></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
+let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
+function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
+window.onscroll=function(){ishide();if((document.documentElement.scrollTop!=0)&&(floatTocDivElem.style.display=='block')){top();}};window.onresize=function(){ishide();}
+document.getElementById("toc_btn_open").addEventListener('click',function(){switch(tocListElem.style.display){case "none":document.getElementById("toc_btn_close").style.display="";tocListElem.style.display="";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="1px solid gray";break;default:break;}},false);document.getElementById("toc_btn_close").addEventListener('click',function(){switch(tocListElem.style.display){case "":document.getElementById("toc_btn_close").style.display="none";tocListElem.style.display="none";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="";break;default:break;}},false);}else{let fixedTocElem=document.getElementsByClassName("toc-article")[0];fixedTocElem.appendChild(tocNavElem);fixedTocElem.parentElement.style.display="";}
+document.getElementById("virtual_toc_list").remove();};</script><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>linux 临时文件的管理</h1></header><date class="post-meta meta-date">2022年5月7日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/linux>linux</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><h2 id=centos临时目录的系统管理>Centos临时目录的系统管理</h2><p>Linux产生大量的临时文件和目录，例如/tmp、/run 。RHEL7或者CentOS7中，systemd提供了一个结构化的可配置方法来管理临时文件和目录，即systemd-tmpfiles，可以创建、删除和管理临时文件的服务。旧版本系统使用watchtmp+cron来共同实现管理临时文件。</p><p>systemd启动后，其中一个启动的服务单元是systemd-tmpfiles-setup，该服务的命令为:systemd-tmpfiles &ndash;creat/&ndash;clean *conf , *conf是可选的，不写默认是使用所有配置文件</p><h2 id=配置文件-优先级从上到下>配置文件，优先级从上到下。</h2><pre><code>/etc/tmpfiles.d/*conf  ，管理员可修改的配置文件
+
+/run/tmpfiles.d/*conf ，daemon应用程序自己管理的配置文件，不建议更改
+
+/usr/lib/tmpfiles.d/*conf，rpm软件安装时，自动更新的配置文件，不能更改
+</code></pre><h2 id=定期清理timer>定期清理timer</h2><pre><code>systemd定时器单元会按固定间隔调用systemd-tmpfiles --clean  。
+
+systemctl status systemd-tmpfiles-clean.timer 查看timer状态。
+
+systemctl cat systemd-tmpfiles-clean.timer  查看timer具体内容，也可以进入/usr/lib/systemd/system目录后使用more  systemd-tmpfiles-clean.timer 来查看。
+
+从timer具体内容可以知道系统启动15分钟后和每天会运行一次systemd-tmpfiles --clean.那么timer定时运行的是哪些服务呢？ 是在systemd-tmpfiles-clean.service里面定义的：
+
+systemctl cat systemd-tmpfiles-clean.service可以查看。
+</code></pre></div><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/posts/centos-8-maintenance-stopped/>Centos 8維護已經停止了</a></li><li><a href=/posts/point-to-point-network-transfer-speed-test/>網絡服務器點對點的網速測試</a></li><li><a href=/posts/linux-cerbot/>给nginx安装免费的证书</a></li><li><a href=/posts/linux-tcp-udp-port-test/>如何测试linux的tcp和udp端口</a></li><li><a href=/posts/why-epel/>为什么要使用epel</a></li></ul></div><div class="post-meta meta-tags"><ul class=clearfix><li><a href=https://clouda3.github.io/tags/linux>linux</a></li><li><a href=https://clouda3.github.io/tags/tmpfiles>tmpfiles</a></li></ul></div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/linux-tmpfiles-clean/ title="linux 临时文件的管理">linux 临时文件的管理</a></li><li><a href=https://clouda3.github.io/posts/aws-best-practise-financial/ title=把最近一些东西aws东西画出来>把最近一些东西aws东西画出来</a></li><li><a href=https://clouda3.github.io/posts/centos-8-maintenance-stopped/ title="Centos 8維護已經停止了">Centos 8維護已經停止了</a></li><li><a href=https://clouda3.github.io/posts/polygon-websoket-data-transfer-issue/ title=Polygon在websoket的连接串数据的经常中断>Polygon在websoket的连接串数据的经常中断</a></li><li><a href=https://clouda3.github.io/posts/application-network-issue-caused-thread-block/ title=交换机故障导致线程阻塞>交换机故障导致线程阻塞</a></li><li><a href=https://clouda3.github.io/posts/alicloud_privatelink/ title=阿里云架构-使用privatelink让不同的vpc的服务可以访问>阿里云架构-使用privatelink让不同的vpc的服务可以访问</a></li><li><a href=https://clouda3.github.io/posts/point-to-point-network-transfer-speed-test/ title=網絡服務器點對點的網速測試>網絡服務器點對點的網速測試</a></li><li><a href=https://clouda3.github.io/posts/aws-cdk/ title="aws cdk introduction">aws cdk introduction</a></li><li><a href=https://clouda3.github.io/posts/local-datacenter-vs-cloud/ title=本地数据中心和云的对比>本地数据中心和云的对比</a></li><li><a href=https://clouda3.github.io/posts/kafka-cluster-setup/ title="kafka cluster的搭建">kafka cluster的搭建</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/alicloud/>Alicloud (1)</a></li><li><a href=https://clouda3.github.io/categories/ansible/>ansible (2)</a></li><li><a href=https://clouda3.github.io/categories/architect/>architect (1)</a></li><li><a href=https://clouda3.github.io/categories/aws/>aws (20)</a></li><li><a href=https://clouda3.github.io/categories/cdk/>cdk (2)</a></li><li><a href=https://clouda3.github.io/categories/centos/>centos (1)</a></li><li><a href=https://clouda3.github.io/categories/cloud/>cloud (20)</a></li><li><a href=https://clouda3.github.io/categories/devops/>devops (2)</a></li><li><a href=https://clouda3.github.io/categories/docker/>docker (3)</a></li><li><a href=https://clouda3.github.io/categories/gohugo/>gohugo (3)</a></li><li><a href=https://clouda3.github.io/categories/java/>java (2)</a></li><li><a href=https://clouda3.github.io/categories/jenkins/>jenkins (1)</a></li><li><a href=https://clouda3.github.io/categories/kafka/>kafka (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernetes/>kubernetes (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernets/>kubernets (1)</a></li><li><a href=https://clouda3.github.io/categories/linux/>linux (12)</a></li><li><a href=https://clouda3.github.io/categories/polygon/>polygon (1)</a></li><li><a href=https://clouda3.github.io/categories/python/>python (1)</a></li><li><a href=https://clouda3.github.io/categories/terraform/>terraform (1)</a></li><li><a href=https://clouda3.github.io/categories/vagrant/>vagrant (1)</a></li><li><a href=https://clouda3.github.io/categories/vm/>vm (1)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/ansible/>ansible</a>
+<a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/baremetal/>baremetal</a>
+<a href=https://clouda3.github.io/tags/block/>block</a>
+<a href=https://clouda3.github.io/tags/cdk/>cdk</a>
+<a href=https://clouda3.github.io/tags/centos/>centos</a>
+<a href=https://clouda3.github.io/tags/cert/>cert</a>
+<a href=https://clouda3.github.io/tags/cloud/>cloud</a>
+<a href=https://clouda3.github.io/tags/datacenter/>Datacenter</a>
+<a href=https://clouda3.github.io/tags/devops/>devops</a>
+<a href=https://clouda3.github.io/tags/docker/>docker</a>
+<a href=https://clouda3.github.io/tags/epel/>epel</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/ingress/>ingress</a>
+<a href=https://clouda3.github.io/tags/java/>java</a>
+<a href=https://clouda3.github.io/tags/jdk/>jdk</a>
+<a href=https://clouda3.github.io/tags/jenkins/>jenkins</a>
+<a href=https://clouda3.github.io/tags/jvm/>JVM</a>
+<a href=https://clouda3.github.io/tags/k8s/>k8s</a>
+<a href=https://clouda3.github.io/tags/kafka/>kafka</a>
+<a href=https://clouda3.github.io/tags/linux/>linux</a>
+<a href=https://clouda3.github.io/tags/lvm/>lvm</a>
+<a href=https://clouda3.github.io/tags/maxfileopen/>maxfileopen</a>
+<a href=https://clouda3.github.io/tags/openvpn/>openvpn</a>
+<a href=https://clouda3.github.io/tags/pip/>pip</a>
+<a href=https://clouda3.github.io/tags/pipeline/>pipeline</a>
+<a href=https://clouda3.github.io/tags/polygon/>polygon</a>
+<a href=https://clouda3.github.io/tags/privatelink/>privatelink</a>
+<a href=https://clouda3.github.io/tags/producer/>producer</a>
+<a href=https://clouda3.github.io/tags/python/>python</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/sshkey/>sshkey</a>
+<a href=https://clouda3.github.io/tags/terraform/>terraform</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a>
+<a href=https://clouda3.github.io/tags/tmpfiles/>tmpfiles</a>
+<a href=https://clouda3.github.io/tags/vagrant/>vagrant</a>
+<a href=https://clouda3.github.io/tags/vm/>vm</a>
+<a href=https://clouda3.github.io/tags/vpc/>vpc</a>
+<a href=https://clouda3.github.io/tags/vpn/>vpn</a>
+<a href=https://clouda3.github.io/tags/websocket/>websocket</a>
+<a href=https://clouda3.github.io/tags/zookeeper/>zookeeper</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2022 <a href=https://clouda3.github.io/>云端的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>
