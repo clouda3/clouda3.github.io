@@ -1,0 +1,105 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=generator content="Hugo 0.59.1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>JWT、JWE、JWS 、JWK 到底是什么 | 云端的blog</title><meta property="og:title" content="JWT、JWE、JWS 、JWK 到底是什么 - 云端的blog"><meta property="og:type" content="article"><meta property="article:published_time" content="2021-12-03T10:30:37&#43;08:00"><meta property="article:modified_time" content="2021-12-03T10:30:37&#43;08:00"><meta name=Keywords content><meta name=description content="JWT、JWE、JWS 、JWK 到底是什么"><meta name=author content><meta property="og:url" content="https://clouda3.github.io/posts/jwt-jwe-jwk-jws/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/prism.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://clouda3.github.io/>云端的blog</a></div><div><nav id=nav-menu class=clearfix><a href=https://clouda3.github.io/>首页</a>
+<a href=https://clouda3.github.io/posts/ title=Blog>Blog</a>
+<a href=https://clouda3.github.io/tags/ title=Tags>Tags</a>
+<a href=https://clouda3.github.io/about title=About>About</a>
+<a href=https://clouda3.github.io/index.xml title=RSS>RSS</a></nav></div></div></div></header><div id=body><div id=virtual_toc_list style=display:none><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#什么是-jwt>什么是 JWT</a></li><li><a href=#jwt-解决什么问题>JWT 解决什么问题？</a></li><li><a href=#jwt-的一些名词解释>JWT 的一些名词解释</a><ul><li><a href=#jwt-header>JWT header</a></li><li><a href=#jwt-payload>JWT payload</a></li><li><a href=#jws-的概念>JWS 的概念</a></li></ul></li><li><a href=#a-jwt-typically-looks-like-this>A JWT typically looks like this:</a></li></ul></li></ul></li></ul></nav></div><div id=float_toc_div style="margin:10px;border:1px solid gray;z-index:99999;display:none"><header style="background-color:#f3f3f3;color:#000;border-bottom:1px solid gray;padding:10px"><strong id=toc_btn_open style=color:#000;font-size:large>目录</strong>
+<strong id=toc_btn_close style=color:#000;font-size:large;float:right>╳</strong></header><div id=toc_list style=background-color:#f3f3f3;color:#000;padding:10px></div></div><style type=text/css>#float_toc_div{position:fixed;display:none;height:auto;font-size:13px}#toc_list a:hover,#toc_list a:active{color:#ba3925}</style><script>window.onload=function(){let tocNavElem=document.getElementById("TableOfContents");let floatTocDivElem=document.getElementById("float_toc_div");let tocListElem=floatTocDivElem.getElementsByTagName('div')[0];let colGroupElem=document.getElementById("body").getElementsByClassName("col-group")[0]
+let floatTocWidth=(document.body.clientWidth-colGroupElem.offsetWidth)/2-16;var useFloatToc=false;if(floatTocWidth>=100){useFloatToc=true;document.getElementById("toc_list").appendChild(tocNavElem);floatTocDivElem.style.display='block';floatTocDivElem.style.width=floatTocWidth+'px';top();floatTocDivElem.style.left='0px';function top(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.top=window.innerHeight/9+'px';}}
+function ishide(){if(document.getElementsByClassName('container')[0].offsetWidth<=720){floatTocDivElem.style.top='0px';}else{floatTocDivElem.style.display='block';}}
+window.onscroll=function(){ishide();if((document.documentElement.scrollTop!=0)&&(floatTocDivElem.style.display=='block')){top();}};window.onresize=function(){ishide();}
+document.getElementById("toc_btn_open").addEventListener('click',function(){switch(tocListElem.style.display){case "none":document.getElementById("toc_btn_close").style.display="";tocListElem.style.display="";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="1px solid gray";break;default:break;}},false);document.getElementById("toc_btn_close").addEventListener('click',function(){switch(tocListElem.style.display){case "":document.getElementById("toc_btn_close").style.display="none";tocListElem.style.display="none";floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom="";break;default:break;}},false);}else{let fixedTocElem=document.getElementsByClassName("toc-article")[0];fixedTocElem.appendChild(tocNavElem);fixedTocElem.parentElement.style.display="";}
+document.getElementById("virtual_toc_list").remove();};</script><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>JWT、JWE、JWS 、JWK 到底是什么</h1></header><date class="post-meta meta-date">2021年12月3日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/token>Token</a></span>
+<span class=meta-category><a href=https://clouda3.github.io/categories/security>Security</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><h3 id=什么是-jwt>什么是 JWT</h3><p>一个JWT，应该是如下形式的：</p><p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.<br>eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.<br>TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p><h3 id=jwt-解决什么问题>JWT 解决什么问题？</h3><p>JWT的主要目的是在服务端和客户端之间以安全的方式来转移声明。主要的应用场景如下所示：</p><p>认证 Authentication；
+授权 Authorization // 注意这两个单词的区别；
+联合识别；
+客户端会话（无状态的会话）；
+客户端机密。</p><h3 id=jwt-的一些名词解释>JWT 的一些名词解释</h3><p>JWS：Signed JWT签名过的jwt
+JWE：Encrypted JWT部分payload经过加密的jwt；目前加密payload的操作不是很普及；
+JWK：JWT的密钥，也就是我们常说的 scret；
+JWKset：JWT key set在非对称加密中，需要的是密钥对而非单独的密钥，在后文中会阐释；
+JWA：当前JWT所用到的密码学算法；
+nonsecure JWT：当头部的签名算法被设定为none的时候，该JWT是不安全的；因为签名的部分空缺，所有人都可以修改。</p><p>### JWT的组成</p><p>一个通常你看到的jwt，由以下三部分组成，它们分别是：</p><p>header：主要声明了JWT的签名算法；
+payload：主要承载了各种声明并传递明文数据；
+signture：拥有该部分的JWT被称为JWS，也就是签了名的JWS；没有该部分的JWT被称为nonsecure JWT 也就是不安全的JWT，此时header中声明的签名算法为none。
+三个部分用·分割。形如 xxxxx.yyyyy.zzzzz的样式。</p><h4 id=jwt-header>JWT header</h4><p>{<br>&ldquo;typ&rdquo;: &ldquo;JWT&rdquo;,<br>&ldquo;alg&rdquo;: &ldquo;none&rdquo;,<br>&ldquo;jti&rdquo;: &ldquo;4f1g23a12aa&rdquo;<br>}</p><p>jwt header 的组成</p><p>头通常由两部分组成：令牌的类型，即JWT，以及正在使用的散列算法，例如HMAC SHA256或RSA。</p><p>当然，还有两个可选的部分，一个是jti，也就是JWT ID，代表了正在使用JWT的编号，这个编号在对应服务端应当唯一。当然，jti也可以放在payload中。</p><p>另一个是cty，也就是content type。这个比较少见，当payload为任意数据的时候，这个头无需设置，但是当内容也带有jwt的时候。也就是嵌套JWT的时候，这个值必须设定为jwt。这种情况比较少见。</p><p>jwt header 的加密算法</p><p>加密的方式如下：</p><p>base64UrlEncode(header)<br>&gt;&gt; eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIiwianRpIjoiNGYxZzIzYTEyYWEifQ</p><h4 id=jwt-payload>JWT payload</h4><p>{<br>&ldquo;iss&rdquo;: &ldquo;<a href='http://shaobaobaoer.cn"'>http://shaobaobaoer.cn&quot;</a>,<br>&ldquo;aud&rdquo;: &ldquo;<a href='http://shaobaobaoer.cn/webtest/jwt_auth/"'>http://shaobaobaoer.cn/webtest/jwt_auth/&quot;</a>,<br>&ldquo;jti&rdquo;: &ldquo;4f1g23a12aa&rdquo;,<br>&ldquo;iat&rdquo;: 1534070547,<br>&ldquo;nbf&rdquo;: 1534070607,<br>&ldquo;exp&rdquo;: 1534074147,<br>&ldquo;uid&rdquo;: 1,<br>&ldquo;data&rdquo;: {<br>&ldquo;uname&rdquo;: &ldquo;shaobao&rdquo;,<br>&ldquo;uEmail&rdquo;: &ldquo;shaobaobaoer@126.com&rdquo;,<br>&ldquo;uID&rdquo;: &ldquo;0xA0&rdquo;,<br>&ldquo;uGroup&rdquo;: &ldquo;guest&rdquo;<br>}<br>}</p><p>jwt payload的组成payload通常由三个部分组成，分别是 Registered Claims ; Public Claims ; Private Claims ;每个声明，都有各自的字段。</p><p>Registered Claims</p><p>iss 【issuer】发布者的url地址
+sub 【subject】该JWT所面向的用户，用于处理特定应用，不是常用的字段
+aud 【audience】接受者的url地址
+exp 【expiration】 该jwt销毁的时间；unix时间戳
+nbf 【not before】 该jwt的使用时间不能早于该时间；unix时间戳
+iat 【issued at】 该jwt的发布时间；unix 时间戳
+jti 【JWT ID】 该jwt的唯一ID编号
+Public Claims 这些可以由使用JWT的那些标准化组织根据需要定义，应当参考文档IANA JSON Web Token Registry。</p><p>Private Claims 这些是为在同意使用它们的各方之间共享信息而创建的自定义声明，既不是注册声明也不是公开声明。上面的payload中，没有public claims只有private claims。</p><p>jwt payload 的加密算法</p><p>加密的方式如下：</p><p>base64UrlEncode(payload)<br>&gt;&gt;eyJpc3MiOiJodHRwOi8vc2hhb2Jhb2Jhb2VyLmNuIiwiYXVkIjoiaHR0cDovL3NoYW9iYW9iYW9lci5jbi93ZWJ0ZXN0L2p3dF9hdXRoLyIsImp0aSI6IjRmMWcyM2ExMmFhIiwiaWF0IjoxNTM0MDcwNTQ3LCJuYmYiOjE1MzQwNzA2MDcsImV4cCI6MTUzNDA3NDE0NywidWlkIjoxLCJkYXRhIjp7InVuYW1lIjoic2hhb2JhbyIsInVFbWFpbCI6InNoYW9iYW9iYW9lckAxMjYuY29tIiwidUlEIjoiMHhBMCIsInVHcm91cCI6Imd1ZXN0In19</p><p>暴露的信息</p><p>所以，在JWT中，不应该在载荷里面加入任何敏感的数据。在上面的例子中，我们传输的是用户的User ID，邮箱等。这个值实际上不是什么敏感内容，一般情况下被知道也是安全的。但是像密码这样的内容就不能被放在JWT中了。如果将用户的密码放在了JWT中，那么怀有恶意的第三方通过Base64解码就能很快地知道你的密码了。</p><p>当然，这也是有解决方案的，那就是加密payload。在之后会说到</p><h4 id=jws-的概念>JWS 的概念</h4><p>JWS 的结构</p><p>JWS ，也就是JWT Signature，其结构就是在之前nonsecure JWT的基础上，在头部声明签名算法，并在最后添加上签名。创建签名，是保证jwt不能被他人随意篡改。</p><p>为了完成签名，除了用到header信息和payload信息外，还需要算法的密钥，也就是secret。当利用非对称加密方法的时候，这里的secret为私钥。</p><p>为了方便后文的展开，我们把JWT的密钥或者密钥对，统一称为JSON Web Key，也就是JWK。</p><p>jwt signature 的签名算法</p><p>复制
+RSASSA || ECDSA || HMACSHA256(<br>base64UrlEncode(header) + &ldquo;.&rdquo; +<br>base64UrlEncode(payload),<br>secret)<br>&gt;&gt;GQPGEpixjPZSZ7CmqXB-KIGNzNl4Y86d3XOaRsfiXmQ<br>&gt;&gt;# 上面这个是用 HMAC SHA256生成的
+到目前为止，jwt的签名算法有三种。</p><p>对称加密HMAC【哈希消息验证码】：HS256/HS384/HS512
+非对称加密RSASSA【RSA签名算法】（RS256/RS384/RS512）
+ECDSA【椭圆曲线数据签名算法】（ES256/ES384/ES512）
+最后将签名与之前的两段内容用.连接，就可以得到经过签名的JWT，也就是JWS。</p><p>复制
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOi8vc2hhb2Jhb2Jhb2VyLmNuIiwiYXVkIjoiaHR0cDovL3NoYW9iYW9iYW9lci5jbi93ZWJ0ZXN0L2p3dF9hdXRoLyIsImp0aSI6IjRmMWcyM2ExMmFhIiwiaWF0IjoxNTM0MDcwNTQ3LCJuYmYiOjE1MzQwNzA2MDcsImV4cCI6MTUzNDA3NDE0NywidWlkIjoxLCJkYXRhIjp7InVuYW1lIjoic2hhb2JhbyIsInVFbWFpbCI6InNoYW9iYW9iYW9lckAxMjYuY29tIiwidUlEIjoiMHhBMCIsInVHcm91cCI6Imd1ZXN0In19.GQPGEpixjPZSZ7CmqXB-KIGNzNl4Y86d3XOaRsfiXmQ
+1.
+当验证签名的时候，利用公钥或者密钥来解密Sign，和 base64UrlEncode(header) + &ldquo;.&rdquo; + base64UrlEncode(payload) 的内容完全一样的时候，表示验证通过。</p><p>JWS 的额外头部声明</p><p>如果对于CA有些概念的话，这些内容会比较好理解一些。为了确保服务器的密钥对可靠有效，同时也方便第三方CA机构来签署JWT而非本机服务器签署JWT，对于JWS的头部，可以有额外的声明，以下声明是可选的，具体取决于JWS的使用方式。如下所示：</p><p>jku: 发送JWK的地址；最好用HTTPS来传输
+jwk: 就是之前说的JWK
+kid: jwk的ID编号
+x5u: 指向一组X509公共证书的URL
+x5c: X509证书链
+x5t：X509证书的SHA-1指纹
+x5t#S256: X509证书的SHA-256指纹
+typ: 在原本未加密的JWT的基础上增加了 JOSE 和 JOSE+ JSON。JOSE序列化后文会说及。适用于JOSE标头的对象与此JWT混合的情况。
+crit: 字符串数组，包含声明的名称，用作实现定义的扩展，必须由 this-&gt;JWT的解析器处理。不常见。</p><h3 id=a-jwt-typically-looks-like-this>A JWT typically looks like this:</h3><p><img src=/images/jwtsample.png alt="jwt sample"></p><p><img src=/images/jwt.jpeg alt="jwt diagram"></p></div><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/posts/jwt/>JWT</a></li></ul></div><div class="post-meta meta-tags"><ul class=clearfix><li><a href=https://clouda3.github.io/tags/jwt>jwt</a></li><li><a href=https://clouda3.github.io/tags/token>token</a></li><li><a href=https://clouda3.github.io/tags/jwk>jwk</a></li><li><a href=https://clouda3.github.io/tags/jws>jws</a></li></ul></div></article><link rel=stylesheet href=https://unpkg.com/gitalk/dist/gitalk.css><script src=https://unpkg.com/gitalk@latest/dist/gitalk.min.js></script><div id=gitalk-container></div><script type=text/javascript>var gitalk=new Gitalk({clientID:'51d585ef48765a9295a2',clientSecret:'fa2938815b7b94d477b79600f3c5fe6f2929ab84',repo:'blog',owner:'clouda3',admin:['clouda3'],id:location.pathname});gitalk.render('gitalk-container');</script></div></div><div id=secondary><section class=widget><form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://clouda3.github.io/>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><div class=addthis_inline_follow_toolbox></div><script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ddc902b7d401ce9"></script></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://clouda3.github.io/posts/service-mesh/ title="什么是service mesh">什么是service mesh</a></li><li><a href=https://clouda3.github.io/posts/why-openshift/ title=企业为什么选择使用openshift>企业为什么选择使用openshift</a></li><li><a href=https://clouda3.github.io/posts/oauth2.0/ title=Oauth2.0>Oauth2.0</a></li><li><a href=https://clouda3.github.io/posts/devops-traning-slide/ title="Devops traning">Devops traning</a></li><li><a href=https://clouda3.github.io/posts/architect-design-principle/ title="architect design principle">architect design principle</a></li><li><a href=https://clouda3.github.io/posts/enterprise-arichitect-solution-arichitect-technical-architect-difference/ title="enterprise atchitect/solution architect/technical architect difference">enterprise atchitect/solution architect/technical architect difference</a></li><li><a href=https://clouda3.github.io/posts/linux-tmpfiles-clean/ title="linux 临时文件的管理">linux 临时文件的管理</a></li><li><a href=https://clouda3.github.io/posts/aws-best-practise-financial/ title=把最近一些东西aws东西画出来>把最近一些东西aws东西画出来</a></li><li><a href=https://clouda3.github.io/posts/centos-8-maintenance-stopped/ title="Centos 8維護已經停止了">Centos 8維護已經停止了</a></li><li><a href=https://clouda3.github.io/posts/jwt/ title=JWT>JWT</a></li></ul></section><section class=widget><h3 class=widget-title>分类</h3><ul class=widget-list><li><a href=https://clouda3.github.io/categories/alicloud/>Alicloud (1)</a></li><li><a href=https://clouda3.github.io/categories/ansible/>ansible (2)</a></li><li><a href=https://clouda3.github.io/categories/architect/>architect (3)</a></li><li><a href=https://clouda3.github.io/categories/aws/>aws (21)</a></li><li><a href=https://clouda3.github.io/categories/cdk/>cdk (2)</a></li><li><a href=https://clouda3.github.io/categories/centos/>centos (1)</a></li><li><a href=https://clouda3.github.io/categories/cloud/>cloud (20)</a></li><li><a href=https://clouda3.github.io/categories/devops/>devops (3)</a></li><li><a href=https://clouda3.github.io/categories/docker/>docker (3)</a></li><li><a href=https://clouda3.github.io/categories/gohugo/>gohugo (3)</a></li><li><a href=https://clouda3.github.io/categories/java/>JAVA (2)</a></li><li><a href=https://clouda3.github.io/categories/jenkins/>jenkins (1)</a></li><li><a href=https://clouda3.github.io/categories/k8s/>k8s (1)</a></li><li><a href=https://clouda3.github.io/categories/kafka/>kafka (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernetes/>kubernetes (1)</a></li><li><a href=https://clouda3.github.io/categories/kubernets/>kubernets (1)</a></li><li><a href=https://clouda3.github.io/categories/linux/>linux (12)</a></li><li><a href=https://clouda3.github.io/categories/paas/>PAAS (2)</a></li><li><a href=https://clouda3.github.io/categories/polygon/>polygon (1)</a></li><li><a href=https://clouda3.github.io/categories/python/>python (1)</a></li><li><a href=https://clouda3.github.io/categories/security/>Security (3)</a></li><li><a href=https://clouda3.github.io/categories/terraform/>terraform (1)</a></li><li><a href=https://clouda3.github.io/categories/token/>Token (2)</a></li><li><a href=https://clouda3.github.io/categories/vagrant/>vagrant (1)</a></li><li><a href=https://clouda3.github.io/categories/vm/>vm (1)</a></li></ul></section><section class=widget><h3 class=widget-title>标签</h3><div class=tagcloud><a href=https://clouda3.github.io/tags/ansible/>ansible</a>
+<a href=https://clouda3.github.io/tags/architect/>architect</a>
+<a href=https://clouda3.github.io/tags/aws/>aws</a>
+<a href=https://clouda3.github.io/tags/baremetal/>baremetal</a>
+<a href=https://clouda3.github.io/tags/block/>block</a>
+<a href=https://clouda3.github.io/tags/cdk/>cdk</a>
+<a href=https://clouda3.github.io/tags/centos/>centos</a>
+<a href=https://clouda3.github.io/tags/cert/>cert</a>
+<a href=https://clouda3.github.io/tags/cloud/>cloud</a>
+<a href=https://clouda3.github.io/tags/cri/>cri</a>
+<a href=https://clouda3.github.io/tags/datacenter/>Datacenter</a>
+<a href=https://clouda3.github.io/tags/devops/>devops</a>
+<a href=https://clouda3.github.io/tags/docker/>docker</a>
+<a href=https://clouda3.github.io/tags/epel/>epel</a>
+<a href=https://clouda3.github.io/tags/hugo/>hugo</a>
+<a href=https://clouda3.github.io/tags/ingress/>ingress</a>
+<a href=https://clouda3.github.io/tags/java/>java</a>
+<a href=https://clouda3.github.io/tags/jdk/>jdk</a>
+<a href=https://clouda3.github.io/tags/jenkins/>jenkins</a>
+<a href=https://clouda3.github.io/tags/jvm/>JVM</a>
+<a href=https://clouda3.github.io/tags/jwk/>jwk</a>
+<a href=https://clouda3.github.io/tags/jws/>jws</a>
+<a href=https://clouda3.github.io/tags/jwt/>jwt</a>
+<a href=https://clouda3.github.io/tags/k8s/>k8s</a>
+<a href=https://clouda3.github.io/tags/kafka/>kafka</a>
+<a href=https://clouda3.github.io/tags/kubenetes/>kubenetes</a>
+<a href=https://clouda3.github.io/tags/linux/>linux</a>
+<a href=https://clouda3.github.io/tags/lvm/>lvm</a>
+<a href=https://clouda3.github.io/tags/maxfileopen/>maxfileopen</a>
+<a href=https://clouda3.github.io/tags/oauth2.0/>oauth2.0</a>
+<a href=https://clouda3.github.io/tags/oidc/>oidc</a>
+<a href=https://clouda3.github.io/tags/openvpn/>openvpn</a>
+<a href=https://clouda3.github.io/tags/paas/>PAAS</a>
+<a href=https://clouda3.github.io/tags/pip/>pip</a>
+<a href=https://clouda3.github.io/tags/pipeline/>pipeline</a>
+<a href=https://clouda3.github.io/tags/polygon/>polygon</a>
+<a href=https://clouda3.github.io/tags/privatelink/>privatelink</a>
+<a href=https://clouda3.github.io/tags/producer/>producer</a>
+<a href=https://clouda3.github.io/tags/python/>python</a>
+<a href=https://clouda3.github.io/tags/saa/>saa</a>
+<a href=https://clouda3.github.io/tags/sap/>sap</a>
+<a href=https://clouda3.github.io/tags/security/>security</a>
+<a href=https://clouda3.github.io/tags/service-mesh/>service mesh</a>
+<a href=https://clouda3.github.io/tags/sshkey/>sshkey</a>
+<a href=https://clouda3.github.io/tags/terraform/>terraform</a>
+<a href=https://clouda3.github.io/tags/themes/>themes</a>
+<a href=https://clouda3.github.io/tags/tmpfiles/>tmpfiles</a>
+<a href=https://clouda3.github.io/tags/token/>token</a>
+<a href=https://clouda3.github.io/tags/vagrant/>vagrant</a>
+<a href=https://clouda3.github.io/tags/vm/>vm</a>
+<a href=https://clouda3.github.io/tags/vpc/>vpc</a>
+<a href=https://clouda3.github.io/tags/vpn/>vpn</a>
+<a href=https://clouda3.github.io/tags/websocket/>websocket</a>
+<a href=https://clouda3.github.io/tags/zookeeper/>zookeeper</a></div></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://clouda3.github.io/index.xml>文章 RSS</a></li></ul></section></div></div></div></div><footer id=footer><div class=container>&copy; 2023 <a href=https://clouda3.github.io/>云端的blog By </a>.
+Powered by <a rel="nofollow noreferer noopener" href=https://gohugo.io target=_blank>Hugo</a>.</div></footer><script type=text/javascript>(function(){$("pre code").parent().addClass("line-numbers")}());window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script><script type=text/javascript src=/js/prism.js async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script><a id=rocket href=#top></a><script type=text/javascript src="/js/totop.js?v=0.0.0" async></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-153597822-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-153597822-1');</script></body></html>
